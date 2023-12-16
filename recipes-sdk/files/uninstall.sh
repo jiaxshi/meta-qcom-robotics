@@ -5,8 +5,9 @@
 
 SDK_NAME="QIRF_SDK"
 
-REMOVE_PKGS=()
-PKG_LIST_FILE="/data/sdk/$SDK_NAME.list"
+REMOVE_PKGS=""
+PKG_LIST_DIR="/home/root/qirf-sdk/"
+PKG_LIST_FILE="$PKG_LIST_DIR/$SDK_NAME.list"
 
 # check permission for execute this script
 function check_permission() {

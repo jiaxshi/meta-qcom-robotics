@@ -5,12 +5,13 @@
 
 SDK_NAME="QIRF_SDK"
 
-FOUND_PKGS=()
-PKG_LIST_DIR="/data/sdk"
+FOUND_PKGS=""
+PKG_LIST_DIR="/home/root/qirf-sdk/"
 PKG_LIST_FILE="$PKG_LIST_DIR/$SDK_NAME.list"
 
 ALL_PKGS="\
-    qirf-sdk \
+    librealsense2-2.54_2.54.2-r0_armv8-2a.ipk \
+    librealsense2-tests_2.54.2-r0_armv8-2a.ipk \
 "
 
 # check permission for execute this script
@@ -80,7 +81,9 @@ function main() {
 
     scan_packages
     for pkg in $ALL_PKGS; do
-        if [[ "$FOUND_PKGS" != *"$pkg"_* ]]; then
+        if echo "$FOUND_PKGS" | grep -q "$pkg"; then
+            echo "NOTE: found package: '$pkg'"
+        else
             echo "ERROR: not found package: '$pkg'"
             exit 1
         fi

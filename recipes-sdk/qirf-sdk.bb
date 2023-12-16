@@ -7,7 +7,6 @@ SRC_URI =+ "file://install.sh"
 SRC_URI =+ "file://uninstall.sh"
 
 # The path infos of qirf content
-SAMPLES_PATH = "${TOPDIR}/workspace/src/vendor/qcom/opensource/robotics-oss"
 TOOLCHAIN_PATH = "${TOPDIR}/SDK"
 SETUP_PATH = "${FILE_DIRNAME}/files/setup.sh"
 
