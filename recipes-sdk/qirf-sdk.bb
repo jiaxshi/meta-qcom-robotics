@@ -16,6 +16,6 @@ PKG_LISTS = " \
 "
 
 # The name and version of qirf SDK artifact
-SDK_PN = "qirf_sdk"
+SDK_PN = "qirf-sdk"
 PV = "2.0.0"
 

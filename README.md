@@ -10,50 +10,75 @@ Let's get started!
 
 # What is the QIRF SDK
 
-The QIRF SDK is a powerful software development kit designed to help developers quickly use applications on Qualcomm robotics platforms.
+The QIRF SDK is a software development kit designed to accelerate developers to use and develop applications on Qualcomm robotics platforms.
 
-The QIRF SDK has the advantages for developing Robotic application as it:
+The QIRF SDK provides advanced features as below:
 
-- Provides APIs and tools for robot application development.
+- APIs and tools for robot application development.
 
-- Provides solutions to address generic robotics problems like sensor input, robot control, navigation, localization and mapping method, etc.
+- Solutions to address generic robotics problems like sensor input, robot control, navigation, localization and mapping method, etc.
 
-- Supports the addition of new applications and libraries to an image, which can be flashed onto a device.
+- Add your own application recipes based on QIRF.
 
-- Supports standalone compilation with the Open-Embedded Build System.
+- Standalone compilation based on Yocto Project.
+
+Note: This alpha release provides ROS core enablement only. Other features are excepted in future releases.
 
 # How to sync and build the QIRF SDK
+
+**QIRF packages are generated combined with Qualcomm Linux 1.0 base in Alpha release. Further, QIRF will also support standalone way to generated SDK packages later.**
+
+## Host Setup
+
+Refer to https://github.com/quic-yocto/qcom-manifest/blob/qcom-linux-kirkstone/README.md setup the host environment.
 
 ## Sync QIRF SDK
 
 ```shell
-cd <your QIRF SDK workspace>
-repo init -u https://github.com/quic-yocto/qcom-manifest -b qcom-linux-kirkstone -m qcom-6.6.00-QLI.1.0-Ver.1.0_robotics.xml
-repo sync
+mkdir <QIRF SDK workspace>
+cd <QIRF SDK workspace>
+repo init -u https://github.com/quic-yocto/qcom-manifest -b qcom-linux-kirkstone -m qcom-6.6.00-QLI.1.0-Ver.1.1_robotics.xml
+repo sync -c -j8
 ```
 
 ## Build QIRF SDK
 
 ```shell
+export SHELL=/bin/bash
 MACHINE=qcm6490 DISTRO=qcom-robotics-ros2-humble source setup-robotics-environment
 bitbake qcom-robotics-full-image
 bitbake qirf-sdk
 ```
+Note:
+The qcom-robotics-full-image consists of [console image](https://github.com/quic-yocto/meta-qcom-distro/blob/kirkstone/recipes-products/images/qcom-console-image.bb) add-on ROS. The multimedia contents will be included later.
+
+QIRF SDK output path: ${QIRF SDK workspace}/build-qcom-robotics-ros2-humble/tmp-glibc/deploy/artifacts.
+
+Image output path: ${QIRF SDK workspace}/build-qcom-robotics-ros2-humble/tmp-glibc/deploy/images/qcm6490/qcom-robotics-full-image.
+
 
 # How to install and uninstall the QIRF SDK
+
+## Flash image
+
+Refer to User Guide on [Qualcomm Robotics RB3 Gen2 Development Kit User Guide](https://docs.qualcomm.com/bundle/80-70014-101/resource/80-70014-101_REV_AC_Qualcomm_Robotics_RB3_Gen2_Development_Kit_User_Guide.pdf)
+to complete flashing image.
+
+Note: Use ${QIRF SDK workspace}/build-qcom-robotics-ros2-humble/tmp-glibc/deploy/images/qcm6490/qcom-robotics-full-image to replace the folder in step 4 of part 3.3.
 
 ## How to install QIRF SDK
 ```shell
 adb root
 adb shell mount -o remount,rw /
-adb push <your QIRF SDK artifacts> /home/root
+adb push <QIRF SDK> /home/root
 adb shell
 export HOME=/home/root
+/bin/bash
 cd /home/root
-tar -zxvf qirf_sdk_2.0.0.tar.gz
-cd qirf_sdk/runtime
-tar -zxvf qirf_sdk.tar.gz
-cd qirf_sdk
+tar -zxvf qirf-sdk_2.0.0.tar.gz
+cd qirf-sdk/runtime
+tar -zxvf qirf-sdk.tar.gz
+cd qirf-sdk
 chmod 777 install.sh uninstall.sh
 sh install.sh
 ```
@@ -64,6 +89,15 @@ adb root
 adb shell mount -o remount,rw /
 adb shell
 export HOME=/home/root
-cd /home/root/qirf_sdk/runtime/qirf_sdk
+/bin/bash
+cd /home/root/qirf-sdk/runtime/qirf-sdk
 sh uninstall.sh
 ```
+
+NOTE: For the further development, please refer to QIRF SDK user guide documentation, to be released later.
+
+# Reference
+
+[Standard Yocto environment](https://docs.yoctoproject.org/4.0.13/brief-yoctoprojectqs/index.html)
+
+[QCOM Linux Yocto BSP releases](https://github.com/quic-yocto/qcom-manifest/blob/qcom-linux-kirkstone/README.md)

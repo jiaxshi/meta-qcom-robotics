@@ -6,7 +6,7 @@
 SDK_NAME="QIRF_SDK"
 
 FOUND_PKGS=""
-PKG_LIST_DIR="/home/root/qirf-sdk/"
+PKG_LIST_DIR="/home/root/qirf/"
 PKG_LIST_FILE="$PKG_LIST_DIR/$SDK_NAME.list"
 
 ALL_PKGS="\
