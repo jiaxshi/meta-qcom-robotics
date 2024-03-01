@@ -1,0 +1,39 @@
+# This patch file is from Qualcomm Innovation Center, Inc. and is provided under the following license:
+
+# Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+# SPDX-License-Identifier: BSD-3-Clause-Clear
+
+From e245c6f0e14dfbb3710247d73c169f6cda6f172a Mon Sep 17 00:00:00 2001
+From: zhengjia zhu <quic_zhezhu@quicinc.com>
+Date: Wed, 21 Feb 2024 14:31:38 +0800
+Subject: [PATCH] Add rplidar scan latency
+
+Signed-off-by: zhengjia zhu <quic_zhezhu@quicinc.com>
+---
+ src/rplidar_client.cpp | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/src/rplidar_client.cpp b/src/rplidar_client.cpp
+index 6441939..84f37a6 100644
+--- a/src/rplidar_client.cpp
++++ b/src/rplidar_client.cpp
+@@ -16,13 +16,11 @@
+ 
+ static void scanCb(sensor_msgs::msg::LaserScan::SharedPtr scan) {
+   int count = scan->scan_time / scan->time_increment;
+-  printf("[SLLIDAR INFO]: I heard a laser scan %s[%d]:\n", scan->header.frame_id.c_str(), count);
+-  printf("[SLLIDAR INFO]: angle_range : [%f, %f]\n", RAD2DEG(scan->angle_min),
+-         RAD2DEG(scan->angle_max));
+ 
+   for (int i = 0; i < count; i++) {
+-    float degree = RAD2DEG(scan->angle_min + scan->angle_increment * i);
+-    printf("[SLLIDAR INFO]: angle-distance : [%f, %f]\n", degree, scan->ranges[i]);
++    long start_time = (long)(scan->header.stamp.sec) * 1000000000 + (scan->header.stamp.nanosec);
++    long sub_time = (rclcpp::Clock().now()).nanoseconds();
++    printf("[SLLIDAR INFO]: receive rplidar scan data latency: %ld ns\n", sub_time - start_time);
+   }
+ }
+ 
+-- 
+2.17.1
+

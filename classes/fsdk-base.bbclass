@@ -8,6 +8,6 @@ do_compile[noexec] = "1"
 do_populate_sysroot[noexec] = "1"
 do_populate_lic[noexec] = "1"
 do_package_qa[noexec] = "1"
+do_generate_robotics_sdk[nostamp] = "1"
 INSANE_SKIP:${PN} += "already-stripped"
 ALLOW_EMPTY:${PN} = "1"
-

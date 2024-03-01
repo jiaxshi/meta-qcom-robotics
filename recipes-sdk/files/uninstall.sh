@@ -6,7 +6,7 @@
 SDK_NAME="QIRF_SDK"
 
 REMOVE_PKGS=""
-PKG_LIST_DIR="/home/root/qirf/"
+PKG_LIST_DIR="/opt/qcom/qirf-sdk/data/"
 PKG_LIST_FILE="$PKG_LIST_DIR/$SDK_NAME.list"
 
 # check permission for execute this script
@@ -48,4 +48,3 @@ function main() {
 }
 
 main "$@"
-

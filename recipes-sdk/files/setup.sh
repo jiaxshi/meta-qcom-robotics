@@ -64,4 +64,3 @@ else
   done
   echo "setup qirf sysroot done!"
 fi
-

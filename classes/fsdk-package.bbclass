@@ -34,7 +34,7 @@ do_generate_robotics_sdk () {
     if [ ! -d ${TMP_SSTATE_IN_DIR}/${SDK_PN} ]; then
         mkdir -p ${TMP_SSTATE_IN_DIR}/${SDK_PN}/
     fi
-    cp -r ${WORKDIR}/*install.sh ${TMP_SSTATE_IN_DIR}/${SDK_PN}/
+    cp -r ${SETUP_PATH} ${TMP_SSTATE_IN_DIR}/${SDK_PN}/
     for pkg in ${PKG_LISTS}
     do
         cp ${DEPLOY_DIR}/${IMAGE_PKGTYPE}/${PACKAGE_ARCH}/${pkg} ${TMP_SSTATE_IN_DIR}/${SDK_PN}/
@@ -70,4 +70,3 @@ organize_sdk_file () {
 python do_generate_robotics_sdk_setscene() {
     sstate_setscene(d)
 }
-

@@ -69,28 +69,23 @@ Note: Use ${QIRF SDK workspace}/build-qcom-robotics-ros2-humble/tmp-glibc/deploy
 ## How to install QIRF SDK
 ```shell
 adb root
-adb shell mount -o remount,rw /
-adb push <QIRF SDK> /home/root
+adb push <QIRF SDK> /opt/qcom/qirf-sdk
 adb shell
-export HOME=/home/root
-/bin/bash
-cd /home/root
+export HOME=/opt/qcom/qirf-sdk
+cd /opt/qcom/qirf-sdk
 tar -zxvf qirf-sdk_2.0.0.tar.gz
 cd qirf-sdk/runtime
 tar -zxvf qirf-sdk.tar.gz
 cd qirf-sdk
-chmod 777 install.sh uninstall.sh
 sh install.sh
 ```
 
 ## How to uninstall QIRF SDK
 ```shell
 adb root
-adb shell mount -o remount,rw /
 adb shell
-export HOME=/home/root
-/bin/bash
-cd /home/root/qirf-sdk/runtime/qirf-sdk
+export HOME=/opt/qcom/qirf-sdk
+cd /opt/qcom/qirf-sdk/qirf-sdk/runtime/qirf-sdk
 sh uninstall.sh
 ```
 

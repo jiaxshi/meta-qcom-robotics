@@ -6,13 +6,10 @@
 SDK_NAME="QIRF_SDK"
 
 FOUND_PKGS=""
-PKG_LIST_DIR="/home/root/qirf/"
+PKG_LIST_DIR="/opt/qcom/qirf-sdk/data/"
 PKG_LIST_FILE="$PKG_LIST_DIR/$SDK_NAME.list"
 
-ALL_PKGS="\
-    librealsense2-2.54_2.54.2-r0_armv8-2a.ipk \
-    librealsense2-tests_2.54.2-r0_armv8-2a.ipk \
-"
+ALL_PKGS=""
 
 # check permission for execute this script
 function check_permission() {
@@ -93,4 +90,3 @@ function main() {
 }
 
 main "$@"
-

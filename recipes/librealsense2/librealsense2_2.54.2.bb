@@ -6,7 +6,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/\
 ${LICENSE};md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-inherit cmake pkgconfig ccache
+inherit cmake pkgconfig ccache robotics-package
 SRC_URI = "git://github.com/IntelRealSense/librealsense.git;protocol=https;branch=master;rev=2dbaaf5964490cb02f811cf2ed38c8a893f5c027"
 
 S = "${WORKDIR}/git"
@@ -29,21 +29,21 @@ RDEPENDS:${PN}-tests += "${PN}"
 
 PACKAGES =+ "${PN}-tests"
 
-FILES:${PN} = "${libdir}/${PN}.so.* \
-       ${sysconfdir}/udev/rules.d/* "
+FILES:${PN} = "${pkg_dest}/${libdir}/${PN}.so.* \
+       ${pkg_dest}/${sysconfdir}/udev/rules.d/* "
 
-FILES:${PN}-tests = "${bindir}/rs-color \
-       ${bindir}/rs-depth \
-       ${bindir}/rs-distance \
-       ${bindir}/rs-save-to-disk \
-       ${bindir}/rs-enumerate-devices \
-       ${bindir}/rs-pose \
-       ${bindir}/rs-fw-logger \
-       ${bindir}/rs-fw-update "
+FILES:${PN}-tests = "${pkg_dest}/${bindir}/rs-color \
+       ${pkg_dest}/${bindir}/rs-depth \
+       ${pkg_dest}/${bindir}/rs-distance \
+       ${pkg_dest}/${bindir}/rs-save-to-disk \
+       ${pkg_dest}/${bindir}/rs-enumerate-devices \
+       ${pkg_dest}/${bindir}/rs-pose \
+       ${pkg_dest}/${bindir}/rs-fw-logger \
+       ${pkg_dest}/${bindir}/rs-fw-update "
 
 do_install:append() {
-    install -d "${D}${sysconfdir}/udev/rules.d"
-    install -m 0644 ${S}/config/99-realsense-libusb.rules ${D}${sysconfdir}/udev/rules.d/99-${PN}-libusb.rules
+    install -d "${D}/${pkg_dest}/${sysconfdir}/udev/rules.d"
+    install -m 0644 ${S}/config/99-realsense-libusb.rules ${D}/${pkg_dest}/${sysconfdir}/udev/rules.d/99-${PN}-libusb.rules
 }
 
 INSANE_SKIP:${PN} += "installed-vs-shipped"
