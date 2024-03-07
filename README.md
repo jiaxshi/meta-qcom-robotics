@@ -22,11 +22,10 @@ The QIRF SDK provides advanced features as below:
 
 - Standalone compilation based on Yocto Project.
 
-Note: This alpha release provides ROS core enablement only. Other features are excepted in future releases.
 
 # How to sync and build the QIRF SDK
 
-**QIRF packages are generated combined with Qualcomm Linux 1.0 base in Alpha release. Further, QIRF will also support standalone way to generated SDK packages later.**
+**QIRF packages are generated combined with Qualcomm Linux 1.0 base.**
 
 ## Host Setup
 
@@ -37,7 +36,7 @@ Refer to https://github.com/quic-yocto/qcom-manifest/blob/qcom-linux-kirkstone/R
 ```shell
 mkdir <QIRF SDK workspace>
 cd <QIRF SDK workspace>
-repo init -u https://github.com/quic-yocto/qcom-manifest -b qcom-linux-kirkstone -m qcom-6.6.00-QLI.1.0-Ver.1.1_robotics.xml
+repo init -u https://github.com/quic-yocto/qcom-manifest -b qcom-linux-kirkstone -m qcom-6.6.13-QLI.1.0-Ver.1.2_robotics.xml
 repo sync -c -j8
 ```
 
@@ -50,7 +49,7 @@ bitbake qcom-robotics-full-image
 bitbake qirf-sdk
 ```
 Note:
-The qcom-robotics-full-image consists of [console image](https://github.com/quic-yocto/meta-qcom-distro/blob/kirkstone/recipes-products/images/qcom-console-image.bb) add-on ROS. The multimedia contents will be included later.
+The qcom-robotics-full-image consists of [multimedia image](https://github.com/quic-yocto/meta-qcom-distro/blob/kirkstone/recipes-products/images/qcom-multimedia-image.bb) add-on ROS.
 
 QIRF SDK output path: ${QIRF SDK workspace}/build-qcom-robotics-ros2-humble/tmp-glibc/deploy/artifacts.
 
