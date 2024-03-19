@@ -1,5 +1,5 @@
 SSTATETASKS += "do_generate_robotics_sdk "
-SSTATE_OUT_DIR = "${DEPLOY_DIR}/artifacts/"
+SSTATE_OUT_DIR = "${DEPLOY_DIR}/qirfsdk_artifacts/"
 SSTATE_IN_DIR = "${TOPDIR}/${SDK_PN}"
 TMP_SSTATE_IN_DIR = "${TOPDIR}/${SDK_PN}_tmp"
 SAMPLES_PATH ?= "NULL"
