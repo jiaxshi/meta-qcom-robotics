@@ -51,4 +51,5 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 PACKAGES = "qirf-${PN}"
 
 ROS_BUILD_TYPE = "ament_cmake"
+
 inherit ros_${ROS_BUILD_TYPE}

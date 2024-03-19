@@ -16,6 +16,15 @@ PKG_LISTS = " \
   qirf-realsense2-camera-msgs_4.51.1-1-r0_armv8-2a.ipk \
   qirf-nav2-bringup_1.1.5-1-r0_armv8-2a.ipk \
   qirf-qrb-ros-imu_1.0-r0_armv8-2a.ipk \
+  qirf-qrb-ros-camera_0.1-r0_armv8-2a.ipk \
+  qirf-qrb-ros-battery_0.1-r0_armv8-2a.ipk \
+  qirf-auto-explore_1.0-r0_armv8-2a.ipk \
+  qirf-mono-vslam_1.0-r0_armv8-2a.ipk \
+  qirf-depth-vslam_1.0-r0_armv8-2a.ipk \
+  qirf-voxel-map_1.0-r0_armv8-2a.ipk \
+  qirf-follow-me_1.0-r0_armv8-2a.ipk \
+  qirf-ocr-msg_1.0-r0_armv8-2a.ipk \
+  qirf-ocr-service_1.0-r0_armv8-2a.ipk \
   ', '', d)} \
 "
 
@@ -23,3 +32,19 @@ PKG_LISTS = " \
 SDK_PN = "qirf-sdk"
 PV = "2.0.0"
 
+# Add the dependence for generate sdk
+do_generate_robotics_sdk[depends] += "librealsense2:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "rplidar-ros2:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "realsense2-camera:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "realsense2-camera-msgs:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "nav2-bringup:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "qrb-ros-imu:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "qrb-ros-camera:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "qrb-ros-battery:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "auto-explore:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "mono-vslam:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "depth-vslam:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "voxel-map:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "follow-me:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "ocr-msg:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "ocr-service:do_package_write_ipk"

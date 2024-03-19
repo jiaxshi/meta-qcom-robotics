@@ -1,5 +1,5 @@
 inherit ros_distro_humble
-inherit ros_component
+inherit ros_component robotics-package
 
 SUMMARY  = "QTI open-source ROS2 node based on qmmf"
 iSECTION = "multimedia"
@@ -79,9 +79,8 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 #DEPENDS += "yaml-cpp"
 DEPENDS += "glib-2.0"
 
-FILESPATH =+ "${WORKSPACE}/robotics/robot-camera:"
-SRC_URI   =  "file://qrb_ros_camera/"
-S         =  "${WORKDIR}/qrb_ros_camera/"
+SRC_URI   +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-camera.git;protocol=https;rev=cbe0f4b323a5f9f5590bd005c0fd6cbbf1655a53;branch=robotics.qclinux.1.0.r1-rel"
+S         =  "${WORKDIR}/git/qrb_ros_camera/"
 
 EXTRA_OECMAKE  += "-DROS_VERSION=${ROS_VERSION}"
 EXTRA_OECMAKE  += "-DROS_DIR=${RECIPE_SYSROOT}/${ROS_DIR}"
@@ -97,6 +96,8 @@ EXTRA_OECMAKE  += "-DCMAKE_CROSSCOMPILING:BOOL=True"
 EXTRA_OECMAKE  += "-DCMAKE_C_COMPILER:STRING=${OECMAKE_C_COMPILER}"
 EXTRA_OECMAKE  += '${@bb.utils.contains("PRODUCT", "ubuntu", \
                   "-DGNU:BOOL=True", "-DGNU:BOOL=False", d)}'
+
+PACKAGES = "qirf-${PN}"
 
 ROS_BUILD_TYPE = "ament_cmake"
 

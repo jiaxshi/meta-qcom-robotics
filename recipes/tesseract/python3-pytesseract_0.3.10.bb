@@ -1,4 +1,3 @@
-
 SUMMARY = "Python-tesseract is a python wrapper for Google's Tesseract-OCR"
 HOMEPAGE = "https://github.com/madmaze/pytesseract"
 AUTHOR = "Samuel Hoffstaetter <samuel@hoffstaetter.com>"

@@ -3,7 +3,7 @@
 
 pkg_dest ?= "/opt/qcom/qirf-sdk"
 
-do_install:append() {
+do_move_opt() {
     install -d ${D}/${pkg_dest}
 
     for item in ${D}/*; do
@@ -13,11 +13,18 @@ do_install:append() {
     done
 }
 
+do_install[postfuncs] += "do_move_opt"
+
 PACKAGES += "qirf-${PN}"
 
 FILES:qirf-${PN} = "${pkg_dest}"
 
+PROVIDES += "qirf-${PN}"
+
 RPROVIDES:qirf-${PN} += "${PN}"
+ROS_EXEC_DEPENDS ?= " "
+
+RDEPENDS:qirf-${PN} += " ${ROS_EXEC_DEPENDS}"
 
 do_package_qa[noexec] = "1"
 
