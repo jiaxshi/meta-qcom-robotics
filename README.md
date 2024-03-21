@@ -36,7 +36,7 @@ Refer to https://github.com/quic-yocto/qcom-manifest/blob/qcom-linux-kirkstone/R
 ```shell
 mkdir <QIRF SDK workspace>
 cd <QIRF SDK workspace>
-repo init -u https://github.com/quic-yocto/qcom-manifest -b qcom-linux-kirkstone -m qcom-6.6.13-QLI.1.0-Ver.1.2_robotics.xml
+repo init -u https://github.com/quic-yocto/qcom-manifest -b qcom-linux-kirkstone -m qcom-6.6.17-QLI.1.0-Ver.1.3_robotics.xml 
 repo sync -c -j8
 ```
 
