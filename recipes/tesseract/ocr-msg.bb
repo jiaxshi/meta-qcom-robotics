@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://${QCOM_COMMON_LICENSE_DIR}/${LICENSE};md5=58d50a3d36f
 
 DEPENDS += "rclcpp sensor-msgs std-msgs ament-cmake-native rosidl-default-generators-native"
 
+RDEPENDS:qirf-${PN}  = "rosidl-default-runtime rclpy sensor-msgs"
+
 SRCREV = "0c22da8226ba064d657e44cc868f06bce274c948"
 
 SRC_URI = "git://qpm-git.qualcomm.com/home2/git/qualcomm/qualcomm-linux-spf-1-0_test_device_roboapilnx.git;protocol=https;branch=master"
