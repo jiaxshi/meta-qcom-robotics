@@ -1,4 +1,4 @@
-inherit qprebuilt robotics-package
+inherit qprebuilt
 
 DESCRIPTION = "Sensor service"
 LICENSE          = "Qualcomm-Technologies-Inc.-Proprietary"
@@ -13,8 +13,6 @@ SRC_URI = "git://qpm-git.qualcomm.com/home2/git/qualcomm/qualcomm-linux-spf-1-0_
 PREBUILT_TARBALL = "sensor-service_2.1_qcm6490.tar.gz"
 
 S = "${WORKDIR}/git/LE.QCROBOTICS.1.0.r1/apps_proc/prebuilt_HY22"
-
-PACKAGES = "qirf-${PN}"
 
 FILES:${PN} += "${includedir}/*"
 FILES:${PN} += "/usr/lib/*"

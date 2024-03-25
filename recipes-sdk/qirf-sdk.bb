@@ -5,7 +5,7 @@ inherit fsdk-base fsdk-package
 
 # The path infos of qirf content
 TOOLCHAIN_PATH = "${TOPDIR}/SDK"
-SETUP_PATH = "${FILE_DIRNAME}/files/setup.sh \
+SETUP_PATH = "${FILE_DIRNAME}/files/qirf-setup.sh \
               ${FILE_DIRNAME}/files/*install.sh"
 
 PKG_LISTS = " \

@@ -8,6 +8,8 @@ SDK_NAME="QIRF_SDK"
 REMOVE_PKGS=""
 PKG_LIST_DIR="/opt/qcom/qirf-sdk/data/"
 PKG_LIST_FILE="$PKG_LIST_DIR/$SDK_NAME.list"
+SETUP_PATH="/etc/profile.d"
+SETUP_SCRIPT_FILE="qirf-setup.sh"
 
 # check permission for execute this script
 function check_permission() {
@@ -45,6 +47,7 @@ function main() {
     done
 
     rm -rf $PKG_LIST_FILE
+    rm -rf $SETUP_PATH/$SETUP_SCRIPT_FILE
 }
 
 main "$@"
