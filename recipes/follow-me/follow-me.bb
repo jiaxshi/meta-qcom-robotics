@@ -8,7 +8,7 @@ DEPENDS += "opencv jpeg tiff jsoncpp librealsense2 ncnn"
 DEPENDS += "ament-cmake-native ament-cmake rclcpp rosidl-adapter rclcpp-components geometry-msgs sensor-msgs"
 DEPENDS += "nav-msgs std-msgs tf2 tf2-ros image-transport cv-bridge rcl-logging-noop"
 
-SRCREV = "0c22da8226ba064d657e44cc868f06bce274c948"
+SRCREV = "9fa4fc99f2c2c3de82c1d64d5d8e302a2c633108"
 
 SRC_URI = "git://qpm-git.qualcomm.com/home2/git/qualcomm/qualcomm-linux-spf-1-0_test_device_roboapilnx.git;protocol=https;branch=master"
 

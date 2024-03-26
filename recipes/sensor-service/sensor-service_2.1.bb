@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${QCOM_COMMON_LICENSE_DIR}/${LICENSE};md5=58d50a3d36f
 
 DEPENDS += "glib-2.0 property-vault qmi-framework protobuf protobuf-native sensors-ship-qti jsoncpp libbsd"
 
-SRCREV = "0c22da8226ba064d657e44cc868f06bce274c948"
+SRCREV = "9fa4fc99f2c2c3de82c1d64d5d8e302a2c633108"
 
 SRC_URI = "git://qpm-git.qualcomm.com/home2/git/qualcomm/qualcomm-linux-spf-1-0_test_device_roboapilnx.git;protocol=https;branch=master"
 
