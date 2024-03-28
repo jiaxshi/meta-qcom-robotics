@@ -1,9 +1,8 @@
-From 780ae275a86a2deb5bbb16457850bbf06f616456 Mon Sep 17 00:00:00 2001
+From a9316784b7cea6fe21c0602160dd02dcfc979240 Mon Sep 17 00:00:00 2001
 From: zhengjia zhu <quic_zhezhu@quicinc.com>
-Date: Tue, 5 Mar 2024 16:42:27 +0800
-Subject: [PATCH] Enable QRC support
+Date: Thu, 28 Mar 2024 20:42:30 +0800
+Subject: [PATCH] Update QRC patchset for test
 
-Signed-off-by: zhengjia zhu <quic_zhezhu@quicinc.com>
 ---
  .../devicetree/bindings/misc/qcom,qrc.yaml    |  31 ++
  arch/arm64/boot/dts/qcom/qcm6490.dtsi         |   9 +
@@ -62,10 +61,10 @@ index 000000000000..d5fe998d8c18
 +        compatible = "qcom,qrc-uart";
 +    };
 diff --git a/arch/arm64/boot/dts/qcom/qcm6490.dtsi b/arch/arm64/boot/dts/qcom/qcm6490.dtsi
-index 52926f0ae84b..dc30b0d5fa61 100644
+index bfbe22529e6f..bbeda5f5039b 100644
 --- a/arch/arm64/boot/dts/qcom/qcm6490.dtsi
 +++ b/arch/arm64/boot/dts/qcom/qcm6490.dtsi
-@@ -535,3 +535,12 @@
+@@ -618,3 +618,12 @@
  &xbl_mem {
  	reg = <0x0 0x80700000 0x0 0x100000>;
  };
@@ -79,7 +78,7 @@ index 52926f0ae84b..dc30b0d5fa61 100644
 +	};
 +};
 diff --git a/arch/arm64/boot/dts/qcom/sc7280.dtsi b/arch/arm64/boot/dts/qcom/sc7280.dtsi
-index 15383728313a..acb993ce8c1d 100644
+index 13f3fcaa61e8..3a7d2697cf0d 100644
 --- a/arch/arm64/boot/dts/qcom/sc7280.dtsi
 +++ b/arch/arm64/boot/dts/qcom/sc7280.dtsi
 @@ -70,6 +70,7 @@
@@ -91,13 +90,13 @@ index 15383728313a..acb993ce8c1d 100644
  
  	clocks {
 diff --git a/arch/arm64/configs/qcom_defconfig b/arch/arm64/configs/qcom_defconfig
-index ed12df7072f5..8e9e7163ffa7 100644
+index 6981f707dfd5..afc184f3c23b 100644
 --- a/arch/arm64/configs/qcom_defconfig
 +++ b/arch/arm64/configs/qcom_defconfig
-@@ -786,3 +786,4 @@ CONFIG_CORESIGHT_CPU_DEBUG=m
- CONFIG_CORESIGHT_CTI=m
- CONFIG_CORESIGHT_TPDM=m
- CONFIG_CORESIGHT_DUMMY=m
+@@ -810,3 +810,4 @@ CONFIG_NFT_NAT=y
+ CONFIG_NF_NAT=y
+ CONFIG_NF_TABLES=y
+ CONFIG_NF_TABLES_INET=y
 +CONFIG_QCOM_QRC=m
 diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
 index a7f9e5bc141f..1ff060150da3 100644
