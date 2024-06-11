@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${QCOM_COMMON_LICENSE_DIR}${LICENSE};md5=58d50a3d36f2
 DESCRIPTION = "Auto explore"
 
 DEPENDS += "opencv curl adreno fastcv-binaries jpeg"
-DEPENDS += "ament-cmake-native ament-cmake rclcpp sensor-msgs nav-msgs"
+DEPENDS += "ament-cmake-auto-native ament-cmake-auto rclcpp sensor-msgs nav-msgs"
 DEPENDS += "std-msgs geometry-msgs tf2 tf2-ros tf2-geometry-msgs"
 
 SRCREV = "9fa4fc99f2c2c3de82c1d64d5d8e302a2c633108"

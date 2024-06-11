@@ -25,6 +25,7 @@ PKG_LISTS = " \
   qirf-follow-me_1.0-r0_armv8-2a.ipk \
   qirf-ocr-msg_1.0-r0_armv8-2a.ipk \
   qirf-ocr-service_1.0-r0_armv8-2a.ipk \
+  qirf-vio_1.0-r0_armv8-2a.ipk \
   ', '', d)} \
 "
 
@@ -48,3 +49,4 @@ do_generate_robotics_sdk[depends] += "voxel-map:do_package_write_ipk"
 do_generate_robotics_sdk[depends] += "follow-me:do_package_write_ipk"
 do_generate_robotics_sdk[depends] += "ocr-msg:do_package_write_ipk"
 do_generate_robotics_sdk[depends] += "ocr-service:do_package_write_ipk"
+do_generate_robotics_sdk[depends] += "vio:do_package_write_ipk"

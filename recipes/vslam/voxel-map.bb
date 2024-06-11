@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://${QCOM_COMMON_LICENSE_DIR}/${LICENSE};md5=58d50a3d36f
 
 DEPENDS += " librealsense2 opencv curl adreno fastcv-binaries jpeg sensor-client"
 
-DEPENDS += "ament-cmake-native ament-cmake rclcpp sensor-msgs nav-msgs std-msgs"
+DEPENDS += "ament-cmake-auto-native ament-cmake-auto rclcpp sensor-msgs nav-msgs std-msgs"
 DEPENDS += "geometry-msgs tf2 tf2-ros tf2-geometry-msgs cv-bridge image-transport rosidl-adapter"
 
 SRCREV = "9fa4fc99f2c2c3de82c1d64d5d8e302a2c633108"
