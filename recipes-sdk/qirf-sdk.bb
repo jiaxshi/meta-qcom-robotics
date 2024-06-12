@@ -3,6 +3,10 @@ LICENSE = "BSD-3-Clause-Clear"
 
 inherit fsdk-base fsdk-package
 
+# The name and version of qirf SDK artifact
+SDK_PN = "qirf-sdk"
+PV = "2.1.0"
+
 # The path infos of qirf content
 TOOLCHAIN_PATH = "${TOPDIR}/SDK"
 SETUP_PATH = "${FILE_DIRNAME}/files/qirf-setup.sh \
@@ -29,9 +33,24 @@ PKG_LISTS = " \
   ', '', d)} \
 "
 
-# The name and version of qirf SDK artifact
-SDK_PN = "qirf-sdk"
-PV = "2.0.0"
+# Add the runtime dependence for qirf sdk
+RDEPENDS:qirf-sdk = " \
+    qirf-librealsense2 \
+    qirf-rplidar-ros2 \
+    qirf-realsense2-camera \
+    qirf-realsense2-camera-msgs \
+    qirf-nav2-bringup \
+    qirf-qrb-ros-imu \
+    qirf-qrb-ros-camera \
+    qirf-qrb-ros-battery \
+    qirf-auto-explore \
+    qirf-follow-me \
+    qirf-mono-vslam \
+    qirf-depth-vslam \
+    qirf-voxel-map \
+    qirf-ocr-service \
+    qirf-vio \
+"
 
 # Add the dependence for generate sdk
 do_generate_robotics_sdk[depends] += "librealsense2:do_package_write_ipk"
