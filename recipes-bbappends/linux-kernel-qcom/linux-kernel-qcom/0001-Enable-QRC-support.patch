@@ -1,21 +1,22 @@
-From a9316784b7cea6fe21c0602160dd02dcfc979240 Mon Sep 17 00:00:00 2001
+From 671b92a6f696c6ae26c6af0ef3583a424f27673a Mon Sep 17 00:00:00 2001
 From: zhengjia zhu <quic_zhezhu@quicinc.com>
-Date: Thu, 28 Mar 2024 20:42:30 +0800
-Subject: [PATCH] Update QRC patchset for test
+Date: Wed, 12 Jun 2024 10:11:41 +0800
+Subject: [PATCH] Update QRC patch
 
+Signed-off-by: zhengjia zhu <quic_zhezhu@quicinc.com>
 ---
- .../devicetree/bindings/misc/qcom,qrc.yaml    |  31 ++
+ .../devicetree/bindings/misc/qcom,qrc.yaml    |  32 ++
  arch/arm64/boot/dts/qcom/qcm6490.dtsi         |   9 +
  arch/arm64/boot/dts/qcom/sc7280.dtsi          |   1 +
- arch/arm64/configs/qcom_defconfig             |   1 +
- drivers/misc/Kconfig                          |   1 +
+ arch/arm64/configs/qcom_addons_debug.config   |   2 +
+ arch/arm64/configs/qcom_defconfig             |   2 +
  drivers/misc/Makefile                         |   1 +
- drivers/misc/qrc/Kconfig                      |  16 +
- drivers/misc/qrc/Makefile                     |   6 +
- drivers/misc/qrc/qrc_core.c                   | 336 +++++++++++++++++
- drivers/misc/qrc/qrc_core.h                   | 142 +++++++
- drivers/misc/qrc/qrc_uart.c                   | 345 ++++++++++++++++++
- 11 files changed, 889 insertions(+)
+ drivers/misc/qrc/Kconfig                      |  25 ++
+ drivers/misc/qrc/Makefile                     |   9 +
+ drivers/misc/qrc/qrc_core.c                   | 327 ++++++++++++++++
+ drivers/misc/qrc/qrc_core.h                   | 143 +++++++
+ drivers/misc/qrc/qrc_uart.c                   | 353 ++++++++++++++++++
+ 11 files changed, 904 insertions(+)
  create mode 100644 Documentation/devicetree/bindings/misc/qcom,qrc.yaml
  create mode 100644 drivers/misc/qrc/Kconfig
  create mode 100644 drivers/misc/qrc/Makefile
@@ -25,10 +26,10 @@ Subject: [PATCH] Update QRC patchset for test
 
 diff --git a/Documentation/devicetree/bindings/misc/qcom,qrc.yaml b/Documentation/devicetree/bindings/misc/qcom,qrc.yaml
 new file mode 100644
-index 000000000000..d5fe998d8c18
+index 000000000000..730efd679ba0
 --- /dev/null
 +++ b/Documentation/devicetree/bindings/misc/qcom,qrc.yaml
-@@ -0,0 +1,31 @@
+@@ -0,0 +1,32 @@
 +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 +%YAML 1.2
 +---
@@ -60,11 +61,12 @@ index 000000000000..d5fe998d8c18
 +    qrc: qcom,qrc_uart {
 +        compatible = "qcom,qrc-uart";
 +    };
++
 diff --git a/arch/arm64/boot/dts/qcom/qcm6490.dtsi b/arch/arm64/boot/dts/qcom/qcm6490.dtsi
-index bfbe22529e6f..bbeda5f5039b 100644
+index dcc844d12f6f..8baa16022fd7 100644
 --- a/arch/arm64/boot/dts/qcom/qcm6490.dtsi
 +++ b/arch/arm64/boot/dts/qcom/qcm6490.dtsi
-@@ -618,3 +618,12 @@
+@@ -624,3 +624,12 @@ &wifi {
  &xbl_mem {
  	reg = <0x0 0x80700000 0x0 0x100000>;
  };
@@ -72,16 +74,16 @@ index bfbe22529e6f..bbeda5f5039b 100644
 +&uart4 {
 +	status = "okay";
 +	qrc:qrc@100 {
-+		compatible = "qcom,qrc-uart";
++	compatible = "qcom,qrc-uart";
 +		status = "okay";
 +		qcom,qrc-reset-gpio = <&tlmm 147 0>;
 +	};
 +};
 diff --git a/arch/arm64/boot/dts/qcom/sc7280.dtsi b/arch/arm64/boot/dts/qcom/sc7280.dtsi
-index 13f3fcaa61e8..3a7d2697cf0d 100644
+index 571cd7844288..70ad5679f18b 100644
 --- a/arch/arm64/boot/dts/qcom/sc7280.dtsi
 +++ b/arch/arm64/boot/dts/qcom/sc7280.dtsi
-@@ -70,6 +70,7 @@
+@@ -70,6 +70,7 @@ aliases {
  		spi13 = &spi13;
  		spi14 = &spi14;
  		spi15 = &spi15;
@@ -89,74 +91,85 @@ index 13f3fcaa61e8..3a7d2697cf0d 100644
  	};
  
  	clocks {
+diff --git a/arch/arm64/configs/qcom_addons_debug.config b/arch/arm64/configs/qcom_addons_debug.config
+index e69de29bb2d1..a6446982e686 100644
+--- a/arch/arm64/configs/qcom_addons_debug.config
++++ b/arch/arm64/configs/qcom_addons_debug.config
+@@ -0,0 +1,2 @@
++CONFIG_QRC=m
++CONFIG_QRC_DEBUG=m
+\ No newline at end of file
 diff --git a/arch/arm64/configs/qcom_defconfig b/arch/arm64/configs/qcom_defconfig
-index 6981f707dfd5..afc184f3c23b 100644
+index 0467cfaef409..c80b1a66aabf 100644
 --- a/arch/arm64/configs/qcom_defconfig
 +++ b/arch/arm64/configs/qcom_defconfig
-@@ -810,3 +810,4 @@ CONFIG_NFT_NAT=y
- CONFIG_NF_NAT=y
- CONFIG_NF_TABLES=y
- CONFIG_NF_TABLES_INET=y
-+CONFIG_QCOM_QRC=m
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index a7f9e5bc141f..1ff060150da3 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -587,4 +587,5 @@ source "drivers/misc/cardreader/Kconfig"
- source "drivers/misc/uacce/Kconfig"
- source "drivers/misc/pvpanic/Kconfig"
- source "drivers/misc/mchp_pci1xxxx/Kconfig"
-+source "drivers/misc/qrc/Kconfig"
- endmenu
+@@ -837,3 +837,5 @@ CONFIG_AQTION=m
+ CONFIG_STMMAC_ETH=m
+ CONFIG_MARVELL_PHY=m
+ CONFIG_PHY_QCOM_SGMII_ETH=m
++CONFIG_QRC=m
++CONFIG_QRC_DEBUG=m
 diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index 616862549158..ce4bbb1f1561 100644
+index 616862549158..2b32f6fd2c3b 100644
 --- a/drivers/misc/Makefile
 +++ b/drivers/misc/Makefile
 @@ -68,3 +68,4 @@ obj-$(CONFIG_TMR_MANAGER)      += xilinx_tmr_manager.o
  obj-$(CONFIG_TMR_INJECT)	+= xilinx_tmr_inject.o
  obj-$(CONFIG_TPS6594_ESM)	+= tps6594-esm.o
  obj-$(CONFIG_TPS6594_PFSM)	+= tps6594-pfsm.o
-+obj-$(CONFIG_QCOM_QRC)          += qrc/
++obj-y				+= qrc/
 diff --git a/drivers/misc/qrc/Kconfig b/drivers/misc/qrc/Kconfig
 new file mode 100644
-index 000000000000..994985d7c320
+index 000000000000..23aac7396e37
 --- /dev/null
 +++ b/drivers/misc/qrc/Kconfig
-@@ -0,0 +1,16 @@
+@@ -0,0 +1,25 @@
 +# SPDX-License-Identifier: GPL-2.0-only
 +#
 +# QRC device driver configuration
 +#
 +
-+menu "QCOM QRC device driver"
++menu "qrc device driver"
 +
-+config QCOM_QRC
-+	tristate "QCOM QRC device driver for Robotic SDK MCU"
++config QRC
++	tristate "QRC device driver for Robotic SDK MCU"
 +	help
-+	  This kernel configuration is used to enable robotic controller
-+	  device driver. Say M here if you want to enable robotic
-+	  controller device driver.
-+	  When in doubt, say N.
++	   This kernel configuration is used to enable robotic controller
++	   device driver. Say Y here if you want to enable robotic
++	   controller device driver.
++	   When in doubt, say N.
 +
++config QRC_DEBUG
++	bool "QRC Debugging"
++	depends on QRC
++	help
++	  Say Y here if you want the robotic controller to produce
++	  a bunch of debug messages to the system log. Select this if you
++	  are having a problem with robotic controller support and want
++	  to see more of what is going on.
++	  When in doubt, say N.
 +endmenu
 diff --git a/drivers/misc/qrc/Makefile b/drivers/misc/qrc/Makefile
 new file mode 100644
-index 000000000000..da2cf81f3c59
+index 000000000000..36782bf3267f
 --- /dev/null
 +++ b/drivers/misc/qrc/Makefile
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,9 @@
 +# SPDX-License-Identifier: GPL-2.0-only
 +#
 +# Makefile for the QRC bus specific drivers.
 +
 +
-+obj-$(CONFIG_QCOM_QRC)		+= qrc_core.o qrc_uart.o
++obj-y		+=  qrc_core.o qrc_uart.o
++
++
++#ccflags-$(CONFIG_QRC_DEBUG) := -DDEBUG
 diff --git a/drivers/misc/qrc/qrc_core.c b/drivers/misc/qrc/qrc_core.c
 new file mode 100644
-index 000000000000..5cedb050dac4
+index 000000000000..6779ccbb4843
 --- /dev/null
 +++ b/drivers/misc/qrc/qrc_core.c
-@@ -0,0 +1,336 @@
+@@ -0,0 +1,327 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/* driver/misc/qrc/qrc_core.c
 + *
@@ -196,9 +209,10 @@ index 000000000000..5cedb050dac4
 +{
 +	struct qrc_dev *qrc;
 +
-+	qrc = container_of(inode->i_cdev, struct qrc_dev, cdev);
++	qrc = container_of(inode->i_cdev,
++						struct qrc_dev, cdev);
 +	filp->private_data = qrc;
-+	if (qrc->qrc_ops)
++	if (qrc->qrc_ops != NULL)
 +		qrc->qrc_ops->qrcops_open(qrc);
 +	return 0;
 +}
@@ -208,7 +222,7 @@ index 000000000000..5cedb050dac4
 +	struct qrc_dev *qrc;
 +
 +	qrc = filp->private_data;
-+	if (qrc->qrc_ops)
++	if (qrc->qrc_ops != NULL)
 +		qrc->qrc_ops->qrcops_close(qrc);
 +
 +	return 0;
@@ -219,34 +233,31 @@ index 000000000000..5cedb050dac4
 +qrc_control_gpio_init(struct qrc_dev *qdev, struct device_node *node)
 +{
 +	int ret;
-+	struct gpio_desc *qrc_boot0_gpiod;
-+	struct gpio_desc *qrc_reset_gpiod;
 +
 +	/* QRC BOOT0 GPIO */
 +	qdev->qrc_boot0_gpio = of_get_named_gpio(node,
-+						 "qcom,qrc-boot-gpio", 0);
++	"qcom,qrc-boot-gpio", 0);
 +	if (qdev->qrc_boot0_gpio < 0)
-+		dev_err(qdev->dev, "qrc_boot0_gpio is not available\n");
++		pr_err("qrc_boot0_gpio is not available\n");
 +
 +	/* UART RESET GPIO */
 +	qdev->qrc_reset_gpio = of_get_named_gpio(node,
-+						 "qcom,qrc-reset-gpio", 0);
++	"qcom,qrc-reset-gpio", 0);
 +	if (qdev->qrc_reset_gpio < 0)
-+		dev_err(qdev->dev, "qrc_reset_gpio is not available\n");
++		pr_err("qrc_reset_gpio is not available\n");
 +
 +	if (gpio_is_valid(qdev->qrc_boot0_gpio)) {
 +		ret = gpio_request(qdev->qrc_boot0_gpio, "QRC_BOOT0_GPIO");
-+		if (ret) {
-+			dev_err(qdev->dev, "gpio request qrc_boot0_gpio failed for:%d\n",
-+				qdev->qrc_boot0_gpio);
++		if (unlikely(ret)) {
++			pr_err("gpio request qrc_boot0_gpio failed for:%d\n",
++					qdev->qrc_boot0_gpio);
 +			return ret;
 +		}
 +
 +		ret = gpio_direction_output(qdev->qrc_boot0_gpio, 1);
-+		qrc_boot0_gpiod = gpio_to_desc(qdev->qrc_boot0_gpio);
-+		ret += gpiod_export(qrc_boot0_gpiod, 0);
++		ret += gpiod_export(qdev->qrc_boot0_gpio, 0);
 +		if (ret) {
-+			dev_err(qdev->dev, "Unable to configure GPIO%d (BOOT0)\n",
++			pr_err("Unable to configure GPIO%d (BOOT0)\n",
 +				qdev->qrc_boot0_gpio);
 +			ret = -EBUSY;
 +			gpio_free(qdev->qrc_boot0_gpio);
@@ -259,18 +270,17 @@ index 000000000000..5cedb050dac4
 +
 +	if (gpio_is_valid(qdev->qrc_reset_gpio)) {
 +		ret = gpio_request(qdev->qrc_reset_gpio, "QRC_RESET_GPIO");
-+		if (ret) {
-+			dev_err(qdev->dev, "gpio request qrc_reset_gpio failed for:%d\n",
-+				qdev->qrc_reset_gpio);
++		if (unlikely(ret)) {
++			pr_err("gpio request qrc_reset_gpio failed for:%d\n",
++			qdev->qrc_reset_gpio);
 +			return ret;
 +		}
 +
 +		ret = gpio_direction_output(qdev->qrc_reset_gpio, 0);
-+		qrc_reset_gpiod = gpio_to_desc(qdev->qrc_reset_gpio);
-+		ret += gpiod_export(qrc_reset_gpiod, 0);
++		ret += gpiod_export(qdev->qrc_reset_gpio, 0);
 +
 +		if (ret) {
-+			dev_err(qdev->dev, "Unable to configure GPIO%d (RESET)\n",
++			pr_err("Unable to configure GPIO%d (RESET)\n",
 +				qdev->qrc_reset_gpio);
 +			ret = -EBUSY;
 +			gpio_free(qdev->qrc_reset_gpio);
@@ -300,9 +310,8 @@ index 000000000000..5cedb050dac4
 +	msleep(100);
 +	gpio_set_value(qdev->qrc_reset_gpio, 0);
 +}
-+
 +static long qrc_cdev_ioctl(struct file *filp, unsigned int cmd,
-+			   unsigned long arg)
++			     unsigned long arg)
 +{
 +	struct qrc_dev *qdev;
 +	void __user *argp = (void __user *)arg;
@@ -319,29 +328,26 @@ index 000000000000..5cedb050dac4
 +		if (gpio_is_valid(qdev->qrc_reset_gpio)) {
 +			qrc_gpio_reboot(qdev);
 +			return 0;
-+		} else {
++		} else
 +			return -EFAULT;
-+		}
 +	case QRC_BOOT_TO_MEM:
 +		if (gpio_is_valid(qdev->qrc_boot0_gpio)) {
 +			gpio_set_value(qdev->qrc_boot0_gpio, 1);
 +			qrc_gpio_reboot(qdev);
 +			return 0;
-+		} else {
++		} else
 +			return -EFAULT;
-+		}
 +	case QRC_BOOT_TO_FLASH:
 +		if (gpio_is_valid(qdev->qrc_boot0_gpio)) {
 +			gpio_set_value(qdev->qrc_boot0_gpio, 0);
 +			qrc_gpio_reboot(qdev);
 +			return 0;
-+		} else {
++		} else
 +			return -EFAULT;
-+		}
 +	case QRC_FIONREAD:
 +		readable_size = qdev->qrc_ops->qrcops_data_status(qdev);
 +		if (copy_to_user(argp, &readable_size, sizeof(unsigned int))) {
-+			dev_err(qdev->dev, "copy_to_user failed\n");
++			pr_err("copy_to_user failed\n");
 +			return -EFAULT;
 +		}
 +		return 0;
@@ -368,7 +374,7 @@ index 000000000000..5cedb050dac4
 +}
 +
 +static ssize_t qrc_cdev_read(struct file *filp, char __user *buf,
-+			     size_t count, loff_t *ppos)
++			       size_t count, loff_t *ppos)
 +{
 +	int ret;
 +	struct qrc_dev *qrc;
@@ -380,6 +386,7 @@ index 000000000000..5cedb050dac4
 +	add_wait_queue(&qrc->r_wait, &wait);
 +
 +	while (qrc->qrc_ops->qrcops_data_status(qrc) == 0) {
++
 +		if (filp->f_flags & O_NONBLOCK) {
 +			ret = -EAGAIN;
 +			goto out;
@@ -407,7 +414,7 @@ index 000000000000..5cedb050dac4
 +}
 +
 +static ssize_t qrc_cdev_write(struct file *filp, const char __user *buf,
-+			      size_t count, loff_t *ppos)
++				size_t count, loff_t *ppos)
 +{
 +	struct qrc_dev *qrc;
 +	enum qrcdev_tx ret;
@@ -447,12 +454,12 @@ index 000000000000..5cedb050dac4
 +	/*register cdev*/
 +	qrc_class = class_create("qrc_class");
 +	if (IS_ERR(qrc_class)) {
-+		dev_err(dev, "failed to allocate class\n");
++		pr_err("failed to allocate class\n");
 +		return PTR_ERR(qrc_class);
 +	}
 +	ret = alloc_chrdev_region(&qrc_devt, 0, 1, "qrc");
 +	if (ret < 0) {
-+		dev_err(dev, "failed to allocate char device region\n");
++		pr_err("failed to allocate char device region\n");
 +		class_destroy(qrc_class);
 +		return ret;
 +	}
@@ -464,12 +471,12 @@ index 000000000000..5cedb050dac4
 +
 +	ret = cdev_add(&qdev->cdev, devt, 1);
 +	if (ret) {
-+		dev_err(dev, "qrc failed to add char device\n");
++		pr_err("qrc failed to add char device\n");
 +		return ret;
 +	}
 +
 +	qdev->dev = device_create(qrc_class, dev, devt, qdev,
-+				  "qrc");
++							"qrc");
 +	if (IS_ERR(qdev->dev)) {
 +		ret = PTR_ERR(qdev->dev);
 +		goto del_cdev;
@@ -487,18 +494,15 @@ index 000000000000..5cedb050dac4
 +{
 +	device_destroy(qrc_class, qdev->dev->devt);
 +	qrc_control_gpio_uninit(qdev);
-+	dev_err(qdev->dev, "qrc drv unregistered\n");
++	pr_err("qrc drv unregistered\n");
 +}
 +EXPORT_SYMBOL_GPL(qrc_unregister);
-+
-+MODULE_DESCRIPTION("Qualcomm Technologies, Inc. QRC Uart Driver");
-+MODULE_LICENSE("GPL");
 diff --git a/drivers/misc/qrc/qrc_core.h b/drivers/misc/qrc/qrc_core.h
 new file mode 100644
-index 000000000000..dfdbc48941da
+index 000000000000..e336ce450197
 --- /dev/null
 +++ b/drivers/misc/qrc/qrc_core.h
-@@ -0,0 +1,142 @@
+@@ -0,0 +1,143 @@
 +/* SPDX-License-Identifier: GPL-2.0-only */
 +/* driver/misc/qrc/qrc_core.h
 + *
@@ -572,9 +576,9 @@ index 000000000000..dfdbc48941da
 +	int		(*qrcops_close)(struct qrc_dev *dev);
 +	int		(*qrcops_setup)(struct qrc_dev *dev);
 +	enum qrcdev_tx	(*qrcops_xmit)(const char __user  *buf,
-+				       size_t data_length, struct qrc_dev *dev);
++			size_t data_length, struct qrc_dev *dev);
 +	int		(*qrcops_receive)(struct qrc_dev *dev,
-+					  char __user *buf, size_t count);
++			char __user *buf, size_t count);
 +	int		(*qrcops_data_status)
 +			(struct qrc_dev *dev);
 +	int		(*qrcops_config)(struct qrc_dev *dev);
@@ -584,8 +588,9 @@ index 000000000000..dfdbc48941da
 +/* qrc char device */
 +struct qrc_dev {
 +	struct qrc_device_stats stats;
-+	struct qrc_device_ops *qrc_ops;		/* qrc dev ops */
-+	struct mutex mutex;			/* protect kfifo access */
++	/* qrc dev ops */
++	struct qrc_device_ops *qrc_ops;
++	struct mutex mutex;
 +	wait_queue_head_t r_wait;
 +	wait_queue_head_t w_wait;
 +	struct fasync_struct *async_queue;
@@ -612,7 +617,7 @@ index 000000000000..dfdbc48941da
 + */
 +struct qrcuart {
 +	struct qrc_dev *qrc_dev;
-+	spinlock_t lock;			/* spinlock for transmitting lock */
++	spinlock_t lock;
 +	struct work_struct tx_work;
 +	struct serdev_device *serdev;
 +	struct kfifo qrc_rx_fifo;
@@ -631,7 +636,6 @@ index 000000000000..dfdbc48941da
 +{
 +	dev->data = data;
 +}
-+
 +static inline void *qrc_get_data(const struct qrc_dev *dev)
 +{
 +	return dev->data;
@@ -641,24 +645,32 @@ index 000000000000..dfdbc48941da
 +void qrc_unregister(struct qrc_dev *qdev);
 +
 +#endif
++
 diff --git a/drivers/misc/qrc/qrc_uart.c b/drivers/misc/qrc/qrc_uart.c
 new file mode 100644
-index 000000000000..74143d88c967
+index 000000000000..d42c278efbab
 --- /dev/null
 +++ b/drivers/misc/qrc/qrc_uart.c
-@@ -0,0 +1,345 @@
+@@ -0,0 +1,353 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/* driver/misc/qrc/qrc_uart.c
 + *
 + * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
 + */
 +
++#include <linux/device.h>
 +#include <linux/errno.h>
++#include <linux/jiffies.h>
 +#include <linux/kernel.h>
 +#include <linux/module.h>
++#include <linux/sched.h>
 +#include <linux/serdev.h>
++#include <linux/types.h>
++#include<linux/slab.h>
 +#include <linux/init.h>
-+#include <linux/of.h>
++#include <linux/cdev.h>
++#include <linux/of_device.h>
++
 +#include "qrc_core.h"
 +
 +#define QRC_RX_FIFO_SIZE 0x400
@@ -666,11 +678,12 @@ index 000000000000..74143d88c967
 +#define QRCUART_DRV_NAME "qrcuart"
 +#define QRC_DRV_VERSION "0.1.0"
 +
++
 +static int qrcuart_setup(struct qrc_dev *dev);
 +
 +static int
 +qrc_uart_receive(struct serdev_device *serdev, const unsigned char *data,
-+		 size_t count)
++		size_t count)
 +{
 +	struct qrcuart *qrc = serdev_device_get_drvdata(serdev);
 +	struct qrc_dev *qrc_dev = qrc->qrc_dev;
@@ -744,7 +757,7 @@ index 000000000000..74143d88c967
 +	if (!qrc->is_open) {
 +		ret = serdev_device_open(serdev);
 +		if (ret) {
-+			dev_err(dev->dev, "qrcuart :Unable to open device\n");
++			pr_err("qrcuart :Unable to open device\n");
 +			return ret;
 +		}
 +		serdev_device_set_baudrate(serdev, 115200);
@@ -790,7 +803,7 @@ index 000000000000..74143d88c967
 +	qrc->tx_left = 0;
 +
 +	ret = kfifo_alloc(&qrc->qrc_rx_fifo, QRC_RX_FIFO_SIZE,
-+			  GFP_KERNEL);
++					  GFP_KERNEL);
 +	if (ret)
 +		return -ENOMEM;
 +
@@ -806,7 +819,7 @@ index 000000000000..74143d88c967
 +
 +/*put data from kfifo to qrc fifo */
 +static int qrcuart_receive(struct qrc_dev *dev, char __user *buf,
-+			   size_t count)
++			       size_t count)
 +{
 +	struct qrcuart *qrc = qrc_get_data(dev);
 +	u32 fifo_len, trans_len;
@@ -816,7 +829,7 @@ index 000000000000..74143d88c967
 +		if (count > fifo_len)
 +			count = fifo_len;
 +		if (kfifo_to_user(&qrc->qrc_rx_fifo,
-+				  (void *)buf, count, &trans_len))
++				(void *)buf, count, &trans_len))
 +			return -EFAULT;
 +		return trans_len;
 +	}
@@ -838,7 +851,7 @@ index 000000000000..74143d88c967
 +}
 +
 +static enum qrcdev_tx qrcuart_xmit(const char __user  *buf,
-+				   size_t data_length, struct qrc_dev *dev)
++				size_t data_length, struct qrc_dev *dev)
 +{
 +	struct qrcuart *qrc = qrc_get_data(dev);
 +	struct qrc_device_stats *n_stats = &dev->stats;
@@ -849,7 +862,7 @@ index 000000000000..74143d88c967
 +
 +	pos = qrc->tx_buffer + qrc->tx_left;
 +	if ((data_length + qrc->tx_left) > QRC_TX_BUFF_SIZE) {
-+		dev_err(dev->dev, "qrcuart transmit date overflow %ld\n", data_length);
++		pr_err("qrcuart transmit date overflow %d\n", data_length);
 +		return __QRCDEV_TX_MIN;
 +	}
 +
@@ -912,7 +925,6 @@ index 000000000000..74143d88c967
 +		kfree(qrc);
 +		return -ENOMEM;
 +	}
-+	qdev->dev = &serdev->dev;
 +	qrc_set_data(qdev, qrc);
 +
 +	qrc->qrc_dev = qdev;
@@ -922,7 +934,7 @@ index 000000000000..74143d88c967
 +	qrcuart_setup(qdev);
 +	ret = qrcuart_init(qdev);
 +	if (ret) {
-+		dev_err(qdev->dev, "qrcuart: Fail to init qrc structure\n");
++		pr_err("qrcuart: Fail to init qrc structure\n");
 +		kfree(qdev);
 +		kfree(qrc);
 +		return ret;
@@ -932,7 +944,7 @@ index 000000000000..74143d88c967
 +
 +	ret = serdev_device_open(serdev);
 +	if (ret) {
-+		dev_err(qdev->dev, "qrcuart :Unable to open device\n");
++		pr_err("qrcuart :Unable to open device\n");
 +		goto free;
 +	}
 +	serdev_device_close(serdev);
@@ -941,7 +953,7 @@ index 000000000000..74143d88c967
 +	ret = qrc_register_device(qdev, &serdev->dev);
 +
 +	if (ret) {
-+		dev_err(qdev->dev, "qrcuart: Unable to register qrc device\n");
++		pr_err("qrcuart: Unable to register qrc device %s\n");
 +		cancel_work_sync(&qrc->tx_work);
 +		goto free;
 +	}
@@ -971,10 +983,11 @@ index 000000000000..74143d88c967
 +}
 +
 +static const struct of_device_id qrc_uart_of_match[] = {
-+	{ .compatible = "qcom,qrc-uart", },
++	{
++	 .compatible = "qcom,qrc-uart",
++	},
 +	{}
 +};
-+
 +MODULE_DEVICE_TABLE(of, qrc_uart_of_match);
 +
 +static struct serdev_device_driver qrc_uart_driver = {
@@ -993,5 +1006,5 @@ index 000000000000..74143d88c967
 +MODULE_DESCRIPTION("Qualcomm Technologies, Inc. QRC Uart Driver");
 +MODULE_LICENSE("GPL");
 -- 
-2.17.1
+2.34.1
 
