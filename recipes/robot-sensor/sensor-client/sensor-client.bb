@@ -1,4 +1,4 @@
-inherit pkgconfig qprebuilt autotools-brokensep
+inherit pkgconfig autotools-brokensep
 
 DESCRIPTION = "sensor client"
 LICENSE          = "BSD-3-Clause-Clear"
@@ -10,12 +10,9 @@ DEPENDS += "protobuf"
 DEPENDS += "protobuf-native"
 DEPENDS += "sensors-ship-qti"
 
-SRC_URI  += "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-sensor.git;protocol=https;rev=eaffe1ec0f2840f9af5a9c17dcfcbccc0f8a7a2b;branch=robotics.qclinux.1.0.r1-rel"
+SRC_URI  += "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-sensor.git;protocol=https;rev=ac636cfd712b4ec4aab05bbfd576f1167dc843d2;branch=robotics.qclinux.1.0.r1-rel"
 
 S = "${WORKDIR}/git/sensor-client"
-
-addtask do_configure after do_prepare_recipe_sysroot before do_install
-addtask do_compile after do_configure before do_install
 
 EXTRA_OECONF += " --enable-sns-direct-channel"
 

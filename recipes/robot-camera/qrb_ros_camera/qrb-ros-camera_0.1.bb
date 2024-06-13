@@ -1,104 +1,67 @@
 inherit ros_distro_humble
 inherit ros_component robotics-package
 
-SUMMARY  = "QTI open-source ROS2 node based on qmmf"
-iSECTION = "multimedia"
 LICENSE  = "BSD-3-Clause-Clear"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
 
-def get_ros_version(d):
-    if bb.utils.contains('DISTRO_FEATURES', 'ros2-humble', '1', '0', d) == "1":
-        return "humble"
-    return "unknown"
-
-def get_ros_package(d):
-    if get_ros_version(d) == "humble":
-        return "ros2-humble"
-    return "unknown"
-ROS_VERSION = "${@get_ros_version(d)}"
-ROS_PACKAGE = "${@get_ros_package(d)}"
-
-def config_target_sys(d):
-    if d.getVar('PRODUCT', True) == 'ubuntu':
-        return "aarch64-linux-gnu"
-    else:
-        return "${TARGET_ARCH}${TARGET_VENDOR}${@['-' + d.getVar('TARGET_OS'), ''][d.getVar('TARGET_OS') == ('' or 'custom')]}"
-
-TARGET_SYS = "${@config_target_sys(d)}"
-
-APPEND_FLAGS += '${@bb.utils.contains("PRODUCT", "ubuntu", \
-                "-target ${TARGET_SYS} -I ${STAGING_INCDIR}/c++ ", "", d)}'
-OECMAKE_C_FLAGS:append   = "${APPEND_FLAGS}"
-OECMAKE_CXX_FLAGS:append = "${APPEND_FLAGS}"
+SRC_URI   +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-camera.git;protocol=https;rev=54f600a227b42ee9bda0cae9d97c72dff4f6d59f;branch=robotics.qclinux.1.0.r1-rel"
+S         =  "${WORKDIR}/git/qrb_ros_camera/"
 
 # Dependencies
 CAMERA_ROS2_NODE_DEPENDS = " \
     camera-server \
     dmabuf-transport \
-    image-transport \
 "
 
 ROS_BUILD_DEPENDS = " \
     rclcpp \
-    rcl \
+    sensor-msgs \
     rclcpp-components \
-    rcutils \
-    sensor-msgs \ 
-    rmw \
-    dmabuf-transport \
-    rmw-implementation-cmake \
-    std-msgs \
     cv-bridge \
     yaml-cpp \
+    glib-2.0 \
+    image-transport \
     camera-info-manager \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
-    ament-cmake-native \
+    ament-cmake-auto-native \
 "
-
-DEPENDS = "${CAMERA_ROS2_NODE_DEPENDS} ${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
 
 ROS_EXEC_DEPENDS = " \
     rclcpp \
-    rcl \
     rclcpp-components \
-    rcutils \
-    rmw \
     sensor-msgs \
+    camera-server \
+    dmabuf-transport \
 "
+ROS_TEST_DEPENDS = " \
+    ament-lint-auto \
+    ament-lint-common \
+    ament-cmake-gtest \
+    ament-cmake-copyright \
+    ament-cmake-cppcheck \
+    ament-cmake-cpplint \
+    ament-cmake-flake8 \
+    ament-cmake-lint-cmake \
+    ament-cmake-pep257 \
+    ament-cmake-uncrustify \
+    ament-cmake-xmllint \
+"
+ROS_EXPORT_DEPENDS = " \
+    rclcpp \
+"
+ROS_BUILDTOOL_EXPORT_DEPENDS = ""
+
+DEPENDS = "${CAMERA_ROS2_NODE_DEPENDS} ${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
+DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEPENDS}"
+
+EXTRA_OECMAKE  += "-DSYSROOT_INCDIR=${RECIPE_SYSROOT}/usr/include"
+EXTRA_OECMAKE  += "-DSYSROOT_LIBDIR=${RECIPE_SYSROOT}/usr/lib"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
-#DEPENDS += "ament-cmake-native"
-#DEPENDS += "rclcpp"
-#DEPENDS += "rclcpp-components"
-#DEPENDS += "ament-cmake"
-#DEPENDS += "sensor-msgs"
-#DEPENDS += "ament-index-cpp"
-#DEPENDS += "image-transport"
-#DEPENDS += "yaml-cpp"
-DEPENDS += "glib-2.0"
-
-SRC_URI   +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-camera.git;protocol=https;rev=cbe0f4b323a5f9f5590bd005c0fd6cbbf1655a53;branch=robotics.qclinux.1.0.r1-rel"
-S         =  "${WORKDIR}/git/qrb_ros_camera/"
-
-EXTRA_OECMAKE  += "-DROS_VERSION=${ROS_VERSION}"
-EXTRA_OECMAKE  += "-DROS_DIR=${RECIPE_SYSROOT}/${ROS_DIR}"
-EXTRA_OECMAKE  += "-DKERNEL_INCDIR=${STAGING_INCDIR}/linux-msm"
-EXTRA_OECMAKE  += "-DSYSROOT_INCDIR=${STAGING_INCDIR}"
-EXTRA_OECMAKE  += "-DSYSROOT_LIBDIR=${STAGING_LIBDIR}"
-EXTRA_OECMAKE  += "-DDASHING_DIR=${RECIPE_SYSROOT}/${DASHING_DIR}"
-EXTRA_OECMAKE  += "-DINSTALL_LIBDIR=${INSTALL_LIBDIR}"
-EXTRA_OECMAKE  += "-DPLATFORM:STRING=linux"
-EXTRA_OECMAKE  += "-DCPU:STRING=64"
-EXTRA_OECMAKE  += "-DENABLE_LIBLOG:BOOL=True"
-EXTRA_OECMAKE  += "-DCMAKE_CROSSCOMPILING:BOOL=True"
-EXTRA_OECMAKE  += "-DCMAKE_C_COMPILER:STRING=${OECMAKE_C_COMPILER}"
-EXTRA_OECMAKE  += '${@bb.utils.contains("PRODUCT", "ubuntu", \
-                  "-DGNU:BOOL=True", "-DGNU:BOOL=False", d)}'
 
 PACKAGES = "qirf-${PN}"
 
 ROS_BUILD_TYPE = "ament_cmake"
-
 inherit ros_${ROS_BUILD_TYPE}

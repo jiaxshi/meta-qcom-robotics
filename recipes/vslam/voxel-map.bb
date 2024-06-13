@@ -1,4 +1,4 @@
-inherit qprebuilt robotics-package
+inherit robotics-qprebuilt-package
 
 DESCRIPTION = "Voxel map"
 LICENSE          = "Qualcomm-Technologies-Inc.-Proprietary"
@@ -9,12 +9,6 @@ DEPENDS += " librealsense2 opencv curl adreno fastcv-binaries jpeg sensor-client
 DEPENDS += "ament-cmake-auto-native ament-cmake-auto rclcpp sensor-msgs nav-msgs std-msgs"
 DEPENDS += "geometry-msgs tf2 tf2-ros tf2-geometry-msgs cv-bridge image-transport rosidl-adapter"
 
-SRCREV = "9fa4fc99f2c2c3de82c1d64d5d8e302a2c633108"
+SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00037.0/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/voxel-map_1.0_armv8-2a.tar.gz"
+SRC_URI[sha256sum] = "7aa3e758a7ac8b29620af850bdd715bdfeff3effe2936db2e8400964290c00c1"
 
-SRC_URI = "git://qpm-git.qualcomm.com/home2/git/qualcomm/qualcomm-linux-spf-1-0_test_device_roboapilnx.git;protocol=https;branch=master"
-
-PREBUILT_TARBALL = "voxel-map_1.0_armv8-2a.tar.gz"
-
-S = "${WORKDIR}/git/LE.QCROBOTICS.1.0.r1/apps_proc/prebuilt_HY22"
-
-PACKAGES = "qirf-${PN}"

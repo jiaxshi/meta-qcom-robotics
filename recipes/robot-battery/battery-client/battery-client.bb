@@ -1,9 +1,8 @@
-inherit pkgconfig qprebuilt autotools-brokensep
+inherit pkgconfig autotools-brokensep
 
 DESCRIPTION = "battery client"
 LICENSE          = "BSD-3-Clause-Clear"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
-
 
 DEPENDS += "dbus"
 
@@ -12,9 +11,6 @@ S = "${WORKDIR}/git/battery-client"
 
 EXTRA_OECONF += " --with-sanitized-headers=${STAGING_KERNEL_BUILDDIR}/usr/include"
 EXTRA_OECONF += " --with-glib"
-
-addtask do_configure after do_prepare_recipe_sysroot before do_install
-addtask do_compile after do_configure before do_install
 
 #Disable the split of debug information into -dbg files
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"

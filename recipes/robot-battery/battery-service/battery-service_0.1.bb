@@ -1,4 +1,4 @@
-inherit pkgconfig qprebuilt autotools-brokensep systemd
+inherit pkgconfig autotools-brokensep systemd
 
 DESCRIPTION = "battery service"
 LICENSE = "BSD-3-Clause-Clear"

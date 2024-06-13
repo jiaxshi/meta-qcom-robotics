@@ -13,10 +13,9 @@ PV = "1.0"
 SRC_URI = "git://github.com/Tencent/ncnn.git;protocol=https;branch=master;rev=4494aadd74bb7c38843746cc4f15c152637dc158"
 S = "${WORKDIR}/git"
 
-FILES:${PN} += "${incdir}/*"
 FILES:${PN} += "${libdir}/*"
 
-PACKAGES = "${PN}"
+PACKAGES = "${PN} ${PN}-dev"
 EXTRA_OECMAKE += " -DNCNN_DISABLE_RTTI=OFF"
 
 do_package_qa[noexec] = "1"

@@ -7,7 +7,7 @@ HOMEPAGE         = "http://support.cdmatech.com"
 LICENSE          = "BSD-3-Clause-Clear"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
 
-SRC_URI   +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-sensor.git;protocol=https;rev=eaffe1ec0f2840f9af5a9c17dcfcbccc0f8a7a2b;branch=robotics.qclinux.1.0.r1-rel"
+SRC_URI   +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-sensor.git;protocol=https;rev=ac636cfd712b4ec4aab05bbfd576f1167dc843d2;branch=robotics.qclinux.1.0.r1-rel"
 S         =  "${WORKDIR}/git/qrb_ros_imu/"
 
 ROS_CN = "qrb_ros_imu"
@@ -41,10 +41,18 @@ ROS_TEST_DEPENDS = " \
     ament-lint-auto \
     ament-lint-common \
     ament-cmake-gtest \
+    ament-cmake-copyright \
+    ament-cmake-cppcheck \
+    ament-cmake-cpplint \
+    ament-cmake-flake8 \
+    ament-cmake-lint-cmake \
+    ament-cmake-pep257 \
+    ament-cmake-uncrustify \
+    ament-cmake-xmllint \
 "
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
-DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
+DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 

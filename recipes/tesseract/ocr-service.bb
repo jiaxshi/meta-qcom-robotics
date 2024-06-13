@@ -1,4 +1,4 @@
-inherit qprebuilt robotics-package
+inherit robotics-qprebuilt-package
 
 DESCRIPTION = "Ocr ros2 node"
 LICENSE          = "Qualcomm-Technologies-Inc.-Proprietary"
@@ -17,12 +17,5 @@ RDEPENDS:qirf-${PN} = "\
     qirf-ocr-msg \
 "
 
-SRCREV = "9fa4fc99f2c2c3de82c1d64d5d8e302a2c633108"
-
-SRC_URI = "git://qpm-git.qualcomm.com/home2/git/qualcomm/qualcomm-linux-spf-1-0_test_device_roboapilnx.git;protocol=https;branch=master"
-
-PREBUILT_TARBALL = "ocr-service_1.0_armv8-2a.tar.gz"
-
-S = "${WORKDIR}/git/LE.QCROBOTICS.1.0.r1/apps_proc/prebuilt_HY22"
-
-PACKAGES = "qirf-${PN}"
+SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00037.0/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/ocr-service_1.0_armv8-2a.tar.gz"
+SRC_URI[sha256sum] = "71c6f971c93a7dba0d796496d21f8b3e701422c3a845b095c5d865f01a8e0013"
