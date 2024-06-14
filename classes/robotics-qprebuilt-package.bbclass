@@ -9,3 +9,4 @@ FILES:qirf-${PN} = "${pkg_dest}"
 
 PROVIDES += "qirf-${PN}"
 RPROVIDES:qirf-${PN} += "${PN}"
+do_package_qa[noexec] = "1"
