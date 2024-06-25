@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://${QCOM_COMMON_LICENSE_DIR}/${LICENSE};md5=58d50a3d36f
 
 DEPENDS += "glib-2.0 property-vault qmi-framework protobuf protobuf-native sensors-ship-qti jsoncpp libbsd"
 
-SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00037.0/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/sensor-service_2.1_qcm6490.tar.gz"
-SRC_URI[sha256sum] = "400d531d4eb21691a86a0c4aad80b7d1c79e6c069b45f8d679014ee7ed453995"
+SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00039.2/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/sensor-service_2.1_qcm6490.tar.gz"
+SRC_URI[sha256sum] = "ef9677205d8c01b38b74ce5f0e6dc8eeb18160ad300c15d36fc9b8bbaaaac732"
 
 S = "${WORKDIR}/sensor-service"
 

@@ -9,6 +9,6 @@ DEPENDS += " librealsense2 opencv curl adreno fastcv-binaries jpeg sensor-client
 DEPENDS += "ament-cmake-auto-native ament-cmake-auto rclcpp sensor-msgs nav-msgs std-msgs"
 DEPENDS += "geometry-msgs tf2 tf2-ros tf2-geometry-msgs cv-bridge image-transport rosidl-adapter"
 
-SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00037.0/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/depth-vslam_1.0_armv8-2a.tar.gz"
-SRC_URI[sha256sum] = "673dae43e15e98b0fca96b427d91ce09f3cdfbd9a6544912a4dde59ad2f1901d"
+SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00039.2/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/depth-vslam_1.0_armv8-2a.tar.gz"
+SRC_URI[sha256sum] = "5ff4a4918f9362dc12aba9ffdc96cba18f200fc9b40dd53a393d84fd712eb515"
 

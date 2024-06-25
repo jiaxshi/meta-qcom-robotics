@@ -9,6 +9,6 @@ DEPENDS += "opencv curl adreno fastcv-binaries jpeg"
 DEPENDS += "ament-cmake-auto-native ament-cmake-auto rclcpp sensor-msgs nav-msgs"
 DEPENDS += "std-msgs geometry-msgs tf2 tf2-ros tf2-geometry-msgs"
 
-SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00037.0/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/auto-explore_1.0_armv8-2a.tar.gz"
-SRC_URI[sha256sum] = "5fe6f4e5b7d1d68fe16e7b95a0c49eaf81af2e70596d5576b0f0d14c75a80bc5"
+SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00039.2/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/auto-explore_1.0_armv8-2a.tar.gz"
+SRC_URI[sha256sum] = "9def0e59401fa0a064852701eb856c085d62ff5f7b3239ca1f4d2c63013ac678"
 
