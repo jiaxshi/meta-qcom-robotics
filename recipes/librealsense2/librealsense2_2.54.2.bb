@@ -6,8 +6,8 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/\
 ${LICENSE};md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-inherit cmake pkgconfig ccache robotics-package
-SRC_URI = "git://github.com/IntelRealSense/librealsense.git;protocol=https;branch=master;rev=2dbaaf5964490cb02f811cf2ed38c8a893f5c027"
+inherit cmake pkgconfig
+SRC_URI = "git://github.com/IntelRealSense/librealsense.git;protocol=https;branch=master;rev=e1688cc318457f7dd57abcdbedd3398062db3009"
 
 S = "${WORKDIR}/git"
 
@@ -21,9 +21,7 @@ EXTRA_OECMAKE += " \
     -DBUILD_WITH_OPENMP=true \
     -DCMAKE_BUILD_TYPE=Release"
 
-OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM_class-target:qrb5165-rb5 = "BOTH"
-
-DEPENDS = "udev libusb1 ccache-native"
+DEPENDS = "udev libusb1"
 
 RDEPENDS:${PN}-tests += "${PN}"
 
@@ -47,3 +45,5 @@ do_install:append() {
 }
 
 INSANE_SKIP:${PN} += "installed-vs-shipped"
+
+inherit robotics-package
