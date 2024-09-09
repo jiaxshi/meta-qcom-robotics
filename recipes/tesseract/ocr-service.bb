@@ -17,5 +17,7 @@ RDEPENDS:qirf-${PN} = "\
     qirf-ocr-msg \
 "
 
-SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00039.2/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/ocr-service_1.0_armv8-2a.tar.gz"
-SRC_URI[sha256sum] = "293776fe75771cef4126caae204ecc46fcf3a513267b931650fc0ac33c137766"
+PV = "1.0"
+
+SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
+SRC_URI[sha256sum] = "b31959cf4e835d97714430006576193fdbe07dce86e3f699fcde0f4897588269"

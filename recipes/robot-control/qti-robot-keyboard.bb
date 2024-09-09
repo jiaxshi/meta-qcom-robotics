@@ -10,13 +10,12 @@ RDEPENDS:{PN} += " \
     rclpy \
 "
 
-FILESPATH =+ "${WORKSPACE}/robotics/robotics-oss:"
-SRC_URI = "file://robot-control/qti_robot_keyboard"
-S = "${WORKDIR}/robot-control/qti_robot_keyboard"
+SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=a0658d11acb591ceb3ba9432e693082d94a69ab5;branch=robotics.qclinux.1.0.r1-rel"
+S =  "${WORKDIR}/git/robot-control/qti_robot_keyboard/"
 
 ROS_BUILD_TYPE = "ament_python"
 
-inherit ros_${ROS_BUILD_TYPE}
+inherit ros_${ROS_BUILD_TYPE} robotics-package
 
 FILES:${PN}:prepend = "${datadir}/qti_robot_keyboard"
 FILES:${PN} += "${libdir}/*"

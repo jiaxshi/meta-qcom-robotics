@@ -49,10 +49,4 @@ S = "${WORKDIR}/git"
 
 ROS_BUILD_TYPE = "ament_cmake"
 
-inherit ros_${ROS_BUILD_TYPE} robotics-package
-
-INSANE_SKIP:${PN} += "installed-vs-shipped"
-
-PACKAGES = "qirf-${PN}"
-
-
+inherit ros_${ROS_BUILD_TYPE}

@@ -9,7 +9,7 @@ S         =  "${WORKDIR}/git/qrb_ros_camera/"
 
 # Dependencies
 CAMERA_ROS2_NODE_DEPENDS = " \
-    camera-server \
+    qcom-camera-server \
     dmabuf-transport \
 "
 
@@ -32,7 +32,7 @@ ROS_EXEC_DEPENDS = " \
     rclcpp \
     rclcpp-components \
     sensor-msgs \
-    camera-server \
+    qcom-camera-server \
     dmabuf-transport \
 "
 ROS_TEST_DEPENDS = " \

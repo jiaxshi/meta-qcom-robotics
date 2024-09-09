@@ -10,3 +10,13 @@ do_package_qa[noexec] = "1"
 do_generate_robotics_sdk[nostamp] = "1"
 INSANE_SKIP:${PN} += "already-stripped"
 ALLOW_EMPTY:${PN} = "1"
+
+#  Set ROBOTICS_ARCH according PACKAGE_ARCH, sepcific arm64 of aarch64
+python __anonymous (){
+    previous_arch = d.getVar('TARGET_ARCH')
+    if d.getVar('IMAGE_PKGTYPE') == "deb":
+        if previous_arch == "aarch64":
+            d.setVar("ROBOTICS_ARCH","arm64")
+    else:
+        d.setVar("ROBOTICS_ARCH",previous_arch)
+}
