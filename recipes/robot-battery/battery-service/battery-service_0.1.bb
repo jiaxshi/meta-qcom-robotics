@@ -12,9 +12,6 @@ S = "${WORKDIR}/git/battery-service"
 #EXTRA_OECONF += " --with-sanitized-headers=${STAGING_KERNEL_BUILDDIR}/usr/include"
 #EXTRA_OECONF += " --with-glib"
 
-addtask do_configure after do_prepare_recipe_sysroot before do_install
-addtask do_compile after do_configure before do_install
-
 #Disable the split of debug information into -dbg files
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 

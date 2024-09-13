@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://${QCOM_COMMON_LICENSE_DIR}/${LICENSE};md5=58d50a3d36f
 
 DEPENDS += "glib-2.0 property-vault qmi-framework protobuf protobuf-native sensors-ship-qti jsoncpp libbsd"
 
-SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00039.2/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/sensor-service_2.1_qcm6490.tar.gz"
-SRC_URI[sha256sum] = "ef9677205d8c01b38b74ce5f0e6dc8eeb18160ad300c15d36fc9b8bbaaaac732"
+SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
+SRC_URI[sha256sum] = "bb28a60e7fec6955b80e0a1fc5062b8da0a13379b3067bb75c32f6ef8dafc668"
 
 S = "${WORKDIR}/sensor-service"
 
@@ -20,7 +20,7 @@ RM_WORK_EXCLUDE += "${PN}"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-PACKAGE_ARCH    ?= "${MACHINE_ARCH}"
+PACKAGE_ARCH    ?= "${TARGET_ARCH}"
 
 do_install() {
     cp -r ${WORKDIR}/etc ${D}/

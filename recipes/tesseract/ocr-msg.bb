@@ -8,5 +8,7 @@ DEPENDS += "rclcpp sensor-msgs std-msgs ament-cmake-native rosidl-default-genera
 
 RDEPENDS:qirf-${PN}  = "rosidl-default-runtime rclpy sensor-msgs"
 
-SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00039.2/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/ocr-msg_1.0_armv8-2a.tar.gz"
-SRC_URI[sha256sum] = "d9aec03ffcec6079559efbc28fe663b9f119e1d4272e091d794bbe16aabc45ad"
+PV = "1.0"
+
+SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
+SRC_URI[sha256sum] = "c55ef452722167128228dc5926bf7693a888aa2fca8632d8450461d317b3a05f"

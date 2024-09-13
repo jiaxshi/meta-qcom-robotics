@@ -8,5 +8,7 @@ DEPENDS += "opencv jpeg tiff jsoncpp librealsense2 ncnn"
 DEPENDS += "ament-cmake-auto-native ament-cmake-auto rclcpp rosidl-adapter rclcpp-components geometry-msgs sensor-msgs"
 DEPENDS += "nav-msgs std-msgs tf2 tf2-ros image-transport cv-bridge rcl-logging-noop"
 
-SRC_URI = "https://artifacts.codelinaro.org/artifactory/qli-ci/software/chip/qualcomm_linux-spf-1-0/qualcomm-linux-spf-1-0_test_device_public/r1.0_00039.2/le-qcrobotics-1-0-r1/apps_proc/prebuilt_HY22/follow-me_1.0_armv8-2a.tar.gz"
-SRC_URI[sha256sum] = "a0098f0cb01b40236311d78a419a86639d8e0297365b45bcaac63b4bff176a8a"
+PV = "1.0"
+
+SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
+SRC_URI[sha256sum] = "c66fad80b4481414c3615b64e8ceff2704f8559b4ee7313db969d9c9bca23028"

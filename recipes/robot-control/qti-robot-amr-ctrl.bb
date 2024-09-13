@@ -23,10 +23,10 @@ DEPENDS += " \
     joint-state-publisher \
     nav2-msgs \
     nav-msgs \
+    libqrc-udriver \
 "
 
 RDEPENDS:${PN} += " \
-    ament-cmake-native \
     ament-cmake \
     std-msgs \
     rosidl-default-generators \
@@ -43,15 +43,15 @@ RDEPENDS:${PN} += " \
     joint-state-publisher \
     nav2-msgs \
     nav-msgs \
+    libqrc-udriver \
 "
 
-FILESPATH =+ "${WORKSPACE}/robotics/robotics-oss:"
-SRC_URI = "file://robot-control/qti_robot_amr_ctrl"
-S = "${WORKDIR}/robot-control/qti_robot_amr_ctrl"
+SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=c3fa8a7c0068142e397768382abd647042ff4bed;branch=robotics.qclinux.1.0.r1-rel"
+S =  "${WORKDIR}/git/robot-control/qti_robot_amr_ctrl/"
 
 ROS_BUILD_TYPE = "ament_cmake"
 
-inherit ros_${ROS_BUILD_TYPE}
+inherit ros_${ROS_BUILD_TYPE} robotics-package
 
 FILES:${PN}:prepend = "${datadir}/qti_robot_amr_ctrl"
 FILES:${PN} += "${libdir}/*"
