@@ -47,3 +47,5 @@ do_install:append() {
 INSANE_SKIP:${PN} += "installed-vs-shipped"
 
 inherit robotics-package
+
+do_configure[network] = "1"
