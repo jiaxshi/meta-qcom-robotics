@@ -12,4 +12,4 @@ DEPENDS += "geometry-msgs cv-bridge image-transport rclcpp-components rosidl-ada
 PV = "1.0"
 
 SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "c019535e3474f6ada15995eeaf2806ad1684ceaf401bb570a67f81028f1e37a3"
+SRC_URI[sha256sum] = "6dd368320da7a0b9e6a54e4b32d16eeea5f924ee614baf0dc208aed0e3e92106"

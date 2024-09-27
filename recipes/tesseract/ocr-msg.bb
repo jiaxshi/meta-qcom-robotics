@@ -11,4 +11,4 @@ RDEPENDS:qirf-${PN}  = "rosidl-default-runtime rclpy sensor-msgs"
 PV = "1.0"
 
 SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "c55ef452722167128228dc5926bf7693a888aa2fca8632d8450461d317b3a05f"
+SRC_URI[sha256sum] = "151eacc324e82d52d1feb2cbdcdd0f094e8196bda8e2f53c0aab2fffb1cfee0e"

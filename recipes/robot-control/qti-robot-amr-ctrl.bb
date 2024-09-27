@@ -46,7 +46,7 @@ RDEPENDS:${PN} += " \
     libqrc-udriver \
 "
 
-SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=c3fa8a7c0068142e397768382abd647042ff4bed;branch=robotics.qclinux.1.0.r1-rel"
+SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=d51e600ab264971b0fe7e4d0425b03065244beaa;branch=robotics.qclinux.1.0.r1-rel"
 S =  "${WORKDIR}/git/robot-control/qti_robot_amr_ctrl/"
 
 ROS_BUILD_TYPE = "ament_cmake"

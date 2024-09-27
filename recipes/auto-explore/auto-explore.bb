@@ -12,5 +12,5 @@ DEPENDS += "std-msgs geometry-msgs tf2 tf2-ros tf2-geometry-msgs"
 PV = "1.0"
 
 SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "8723e33099dc7b949d43bd7b52e7674c1ad8cb8b9d11f1ec5305078ae4467c44"
+SRC_URI[sha256sum] = "f5c6a9892823848b714b419c7be9b7f476cde6ad0b4508be28ad9cd63c6a1eaa"
 
