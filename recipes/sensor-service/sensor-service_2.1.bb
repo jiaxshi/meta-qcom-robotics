@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${QCOM_COMMON_LICENSE_DIR}/${LICENSE};md5=58d50a3d36f
 DEPENDS += "glib-2.0 property-vault qmi-framework protobuf protobuf-native sensors-ship-qti jsoncpp libbsd"
 
 SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "bb28a60e7fec6955b80e0a1fc5062b8da0a13379b3067bb75c32f6ef8dafc668"
+SRC_URI[sha256sum] = "7e7b0437f524d81e148c9a4321619528889abab99f8051e46980b8194297f5d2"
 
 S = "${WORKDIR}/sensor-service"
 

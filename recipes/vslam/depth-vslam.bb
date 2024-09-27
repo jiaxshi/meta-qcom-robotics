@@ -12,5 +12,5 @@ DEPENDS += "geometry-msgs tf2 tf2-ros tf2-geometry-msgs cv-bridge image-transpor
 PV = "1.0"
 
 SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "c1d639f0aa7f0895a53c97d9667ba6764147fd347892efbab423bb31f130a587"
+SRC_URI[sha256sum] = "0547fe37aba397d0550c8c64730afd2a9e71cd2ddfa9b1cb3621a996ab1efc37"
 
