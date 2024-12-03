@@ -1,15 +1,19 @@
 SSTATETASKS += "do_generate_robotics_sdk "
-SSTATE_OUT_DIR = "${DEPLOY_DIR}/qirfsdk_artifacts/"
+
+SSTATE_OUT_DIR = "${DEPLOY_DIR}/${TARGET_SDK}sdk_artifacts/"
+
 SSTATE_IN_DIR = "${TOPDIR}/${SDK_PN}"
 TMP_SSTATE_IN_DIR = "${TOPDIR}/${SDK_PN}_tmp"
+
 SAMPLES_PATH ?= "NULL"
 TOOLCHAIN_PATH ?= "NULL"
 TOOLS_PATH ?= "NULL"
 README_PATH ?= "NULL"
 SETUP_PATH ?= "NULL"
-SDK_PREFIX = "qirf-"
-PACKAGE_ARCH = "${TARGET_ARCH}"
+PACKAGE_ARCH = "${SOC_ARCH}"
 
+TARGET_SDK ?= "robotics"
+SDK_PN = "${TARGET_SDK}-sdk"
 
 python __anonymous () {
     import oe.packagedata
@@ -19,20 +23,23 @@ python __anonymous () {
     bb.build.addtask('do_generate_robotics_sdk', 'do_populate_sysroot', 'do_package_write_{}'.format(package_type), d)
     d.appendVarFlag('do_package_write_{}'.format(package_type), 'prefuncs', ' do_reorganize_pkg_dir')
 
-    for pkg in d.getVar('RDEPENDS:{}'.format(recipe_name)).split():
+    for pkg in str(d.getVar('RDEPENDS:{}'.format(recipe_name))).split():
+        suffixes = ("-dev", "-doc", "-staticdev", "-dbg")
+        package_name = ""
+        for suffix in suffixes:
+            if pkg.endswith(suffix):
+                package_name = pkg[:-len(suffix)]
+        if package_name == "":
+            package_name = pkg
+        recipe_name_pkg = ""
         sdata = oe.packagedata.read_subpkgdata(pkg, d)
-        package_name = pkg
-        recipe_name_var = ""
-        sdk_name = d.getVar("SDK_PREFIX")
         if 'PN' not in sdata.keys():
-            bb.warn("{} not in database".format(package_name))
-            if package_name.startswith(sdk_name):
-                recipe_name_var = package_name.replace(sdk_name,"")
-            else:
-                recipe_name_var = package_name
+            bb.note("{} not in database".format(package_name))
+            recipe_name_pkg = package_name
         else:
-            recipe_name_var = sdata['PN']
-        d.appendVarFlag('do_generate_robotics_sdk', 'depends', ' {}:do_package_write_{} '.format(recipe_name_var,package_type))
+            recipe_name_pkg = sdata['PN']
+        if package_name not in d.getVar("BASIC_DEPENDENCY"):
+            d.appendVarFlag('do_generate_robotics_sdk', 'depends', ' {}:do_package_write_{} '.format(recipe_name_pkg,package_type))
 }
 
 addtask do_generate_robotics_sdk_setscene
@@ -44,12 +51,15 @@ do_generate_robotics_sdk[cleandirs] = "${SSTATE_IN_DIR} ${SSTATE_OUT_DIR} ${TMP_
 do_generate_robotics_sdk[stamp-extra-info] = "${MACHINE_ARCH}"
 
 PKG_LISTS += "${@pkg_list(d)}"
+PKG_LISTS += "${PN}_${PV}-${PR}_${ROBOTICS_ARCH}.${IMAGE_PKGTYPE}"
 
 def pkg_list(d):
     recipe_name = d.getVar("PN")
     import oe.packagedata
     pkglist = str()
-    for pkg in d.getVar('RDEPENDS:{}'.format(recipe_name)).split():
+    for pkg in str(d.getVar('RDEPENDS:{}'.format(recipe_name))).split():
+        if pkg in d.getVar("BASIC_DEPENDENCY"):
+            continue
         sdata = oe.packagedata.read_subpkgdata(pkg, d)
         package_name = pkg
         if 'PN' not in sdata.keys():
@@ -59,7 +69,7 @@ def pkg_list(d):
         recipe_name = sdata['PN']
         package_arch = d.getVar("ROBOTICS_ARCH")
         package_type = d.getVar("IMAGE_PKGTYPE")
-        package = "{}_{}-{}_{}.{} ".format(package_name,package_version,package_reversion,package_arch,package_type)
+        package = " *{}_{}-{}_{}.{} ".format(package_name,package_version,package_reversion,package_arch,package_type)
         pkglist += package
     return pkglist
 
@@ -68,14 +78,13 @@ def depends_funcs(d):
     package_type = d.getVar("IMAGE_PKGTYPE", True)
     recipe_name = d.getVar("PN")
     depends = ""
-    for pkg in d.getVar('RDEPENDS:{}'.format(recipe_name)).split():
+    for pkg in str(d.getVar('RDEPENDS:{}'.format(recipe_name))).split():
         sdata = oe.packagedata.read_subpkgdata(pkg, d)
         package_name = pkg
         if 'PN' not in sdata.keys():
             continue
-        recipe_name_var = sdata['PN']
-        package_arch = d.getVar("ROBOTICS_ARCH")
-        depends += ' {}:do_package_write_{} '.format(recipe_name_var,package_type)
+        recipe_name = sdata['PN']
+        depends += ' {}:do_package_write_{} '.format(recipe_name,package_type)
     bb.warn("depends: %s" %depends)
     return depends
 
@@ -87,8 +96,8 @@ do_generate_robotics_sdk () {
         bbnote "create directory ${TMP_SSTATE_IN_DIR}/${SDK_PN}"
         mkdir -p ${TMP_SSTATE_IN_DIR}/${SDK_PN}/
     fi
-    bbnote "copy file from ${SETUP_PATH} to ${TMP_SSTATE_IN_DIR}/${SDK_PN}"
-    cp -r ${SETUP_PATH} ${TMP_SSTATE_IN_DIR}/${SDK_PN}/
+    #bbnote "copy file from ${SETUP_PATH} to ${TMP_SSTATE_IN_DIR}/${SDK_PN}"
+    #cp -r ${SETUP_PATH} ${TMP_SSTATE_IN_DIR}/${SDK_PN}/
     for pkg in ${PKG_LISTS}
     do
         bbnote "copy file from ${DEPLOY_DIR}/${IMAGE_PKGTYPE}/${PACKAGE_ARCH}/${pkg} to ${TMP_SSTATE_IN_DIR}/${SDK_PN}"
@@ -96,7 +105,7 @@ do_generate_robotics_sdk () {
     done
     cd ${TMP_SSTATE_IN_DIR}
     bbnote "make tarball ${SDK_PN}.tar.gz from ${TMP_SSTATE_IN_DIR}/${SDK_PN}"
-    tar -zcf ${SSTATE_IN_DIR}/${SDK_PN}.tar.gz ./${SDK_PN}/*
+    tar -zcf ${SSTATE_IN_DIR}/${SDK_PN}.tar.gz ./${SDK_PN}
 }
 
 # Add a task to copy sample code/toolchain/setup scripts,
@@ -119,7 +128,7 @@ organize_sdk_file () {
 
     # organize all files as finial sdk
     cd ${SSTATE_IN_DIR}
-    tar -zcf ${SSTATE_IN_DIR}/${SDK_PN}_${PV}.tar.gz ./${SDK_PN}/*
+    tar -zcf ${SSTATE_IN_DIR}/${SDK_PN}_${PV}.tar.gz ./${SDK_PN}
     rm -r ${SSTATE_IN_DIR}/${SDK_PN}
 }
 

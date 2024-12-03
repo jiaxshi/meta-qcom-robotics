@@ -1,18 +1,19 @@
-pkg_dest = "/opt/qcom/qirf-sdk"
+pkg_dest = "/usr"
 
 do_install() {
-   cp -r ${WORKDIR}/opt ${D}/
+    cp -r ${WORKDIR}/usr ${D}/
 }
 
-PACKAGES = "qirf-${PN}"
-FILES:qirf-${PN} = "${pkg_dest}"
+PACKAGES = "${PN}"
+FILES:${PN} = "${pkg_dest} \
+    "
 
-PROVIDES += "qirf-${PN}"
-RPROVIDES:qirf-${PN} += "${PN}"
+PROVIDES += "${PN}"
+RPROVIDES:${PN} += "${PN}"
 
 python __anonymous(){
-    target_arch = d.getVar("TARGET_ARCH")
-    d.setVar('PACKAGE_ARCH',target_arch)
+    soc_arch = d.getVar("SOC_ARCH")
+    d.setVar('PACKAGE_ARCH',soc_arch)
 }
 
 do_package_qa[noexec] = "1"
