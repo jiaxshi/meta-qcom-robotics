@@ -1,4 +1,4 @@
-inherit ros_distro_humble
+inherit ros_distro_${ROS_DISTRO}
 inherit ros_component
 
 DESCRIPTION = "The QCOM AMR URDF ROS2 package"
@@ -16,7 +16,7 @@ RDEPENDS:${PN} += " \
     urdf \
 "
 
-SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=2e38920d0512acaa18d28e37c16a11a1388aa301;branch=robotics.qclinux.1.0.r1-rel"
+SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=a5b0e54e888928a3b410bbddb9cd446023e4ab7e;branch=robotics.qclinux.1.0.r1-rel"
 S =  "${WORKDIR}/git/robot-control/qti_robot_urdf/"
 
 ROS_BUILD_TYPE = "ament_cmake"

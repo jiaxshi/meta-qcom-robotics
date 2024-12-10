@@ -6,11 +6,23 @@ LIC_FILES_CHKSUM = "file://${QCOM_COMMON_LICENSE_DIR}/${LICENSE};md5=58d50a3d36f
 
 DEPENDS += " librealsense2 opencv curl ${GL_PROVIDER} qcom-fastcv-binaries jpeg sensor-client"
 
-DEPENDS += "ament-cmake-auto-native ament-cmake-auto rclcpp sensor-msgs nav-msgs std-msgs"
-DEPENDS += "geometry-msgs tf2 tf2-ros tf2-geometry-msgs cv-bridge image-transport rosidl-adapter"
+DEPENDS = " \
+    rclcpp \
+    sensor-msgs \
+    nav-msgs \
+    std-msgs \
+    geometry-msgs \
+    tf2 \
+    tf2-ros \
+    tf2-geometry-msgs \
+    cv-bridge \
+    image-transport \
+    rosidl-adapter \
+"
 
 PV = "1.0"
 
-SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "0547fe37aba397d0550c8c64730afd2a9e71cd2ddfa9b1cb3621a996ab1efc37"
+SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
+SRC_URI[sha256sum] = "91dae7509a33fb425e84685301e3692ce7d0baa3264d3c46fa28b22ca601a2fd"
 
+INSANE_SKIP:${PN} += "already-stripped"

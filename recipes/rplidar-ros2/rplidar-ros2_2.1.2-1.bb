@@ -1,4 +1,4 @@
-inherit ros_distro_humble
+inherit ros_distro_${ROS_DISTRO}
 inherit ros_component
 
 DESCRIPTION = "The rplidar ros package, support rplidar A2/A1 and A3/S1"

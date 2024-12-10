@@ -1,4 +1,4 @@
-inherit ros_distro_humble
+inherit ros_distro_${ROS_DISTRO}
 inherit ros_component robotics-package
 
 DESCRIPTION = "qrb ros battery"
@@ -54,7 +54,6 @@ DEPENDS += "dbus"
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 RDEPENDS:${PN} += "dbus"
 
-PACKAGES = "qirf-${PN}"
 
 ROS_BUILD_TYPE = "ament_cmake"
 inherit ros_${ROS_BUILD_TYPE}

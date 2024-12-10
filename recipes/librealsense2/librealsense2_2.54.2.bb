@@ -25,23 +25,23 @@ DEPENDS = "udev libusb1"
 
 RDEPENDS:${PN}-tests += "${PN}"
 
-PACKAGES =+ "${PN}-tests"
+PACKAGES += "${PN}-tests"
 
-FILES:${PN} = "${pkg_dest}/${libdir}/${PN}.so.* \
-       ${pkg_dest}/${sysconfdir}/udev/rules.d/* "
+FILES:${PN} = "${pkg_dest}${libdir}/${PN}.so.* \
+       ${pkg_dest}${sysconfdir}/udev/rules.d/* "
 
-FILES:${PN}-tests = "${pkg_dest}/${bindir}/rs-color \
-       ${pkg_dest}/${bindir}/rs-depth \
-       ${pkg_dest}/${bindir}/rs-distance \
-       ${pkg_dest}/${bindir}/rs-save-to-disk \
-       ${pkg_dest}/${bindir}/rs-enumerate-devices \
-       ${pkg_dest}/${bindir}/rs-pose \
-       ${pkg_dest}/${bindir}/rs-fw-logger \
-       ${pkg_dest}/${bindir}/rs-fw-update "
+FILES:${PN}-tests = "${pkg_dest}${bindir}/rs-color \
+       ${pkg_dest}${bindir}/rs-depth \
+       ${pkg_dest}${bindir}/rs-distance \
+       ${pkg_dest}${bindir}/rs-save-to-disk \
+       ${pkg_dest}${bindir}/rs-enumerate-devices \
+       ${pkg_dest}${bindir}/rs-pose \
+       ${pkg_dest}${bindir}/rs-fw-logger \
+       ${pkg_dest}${bindir}/rs-fw-update "
 
 do_install:append() {
-    install -d "${D}/${pkg_dest}/${sysconfdir}/udev/rules.d"
-    install -m 0644 ${S}/config/99-realsense-libusb.rules ${D}/${pkg_dest}/${sysconfdir}/udev/rules.d/99-${PN}-libusb.rules
+    install -d "${D}/${sysconfdir}/udev/rules.d"
+    install -m 0644 ${S}/config/99-realsense-libusb.rules ${D}/${sysconfdir}/udev/rules.d/99-${PN}-libusb.rules
 }
 
 INSANE_SKIP:${PN} += "installed-vs-shipped"
