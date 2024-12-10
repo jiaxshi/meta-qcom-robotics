@@ -8,9 +8,8 @@ DEPENDS += "glib-2.0 property-vault"
 DEPENDS += "qmi-framework"
 DEPENDS += "protobuf"
 DEPENDS += "protobuf-native"
-DEPENDS += "sensors-ship-qti"
 
-SRC_URI  += "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-sensor.git;protocol=https;rev=ac636cfd712b4ec4aab05bbfd576f1167dc843d2;branch=robotics.qclinux.1.0.r1-rel"
+SRC_URI  += "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-sensor.git;protocol=https;rev=cc6df61ef46b9dc9c6169714ea0e7b69664f1fa8;branch=robotics.qclinux.1.0.r1-rel"
 
 S = "${WORKDIR}/git/sensor-client"
 
@@ -40,6 +39,8 @@ FILES_SOLIBSDEV = ""
 do_install:append() {
     install -d ${D}/usr/include/
     install -m 0755 ${S}/inc/*.h -D ${D}/usr/include
+    install -d ${D}/usr/lib/pkgconfig/
+    install -m 0644 ${S}/*.pc -D ${D}/usr/lib/pkgconfig
 }
 
-PACKAGE_ARCH    ?= "${MACHINE_ARCH}"
+PACKAGE_ARCH    ?= "${SOC_ARCH}"

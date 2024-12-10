@@ -1,4 +1,4 @@
-inherit ros_distro_humble
+inherit ros_distro_${ROS_DISTRO} pkgconfig
 inherit ros_component robotics-package
 
 DESCRIPTION = "QRB ROS IMU Node"
@@ -7,7 +7,7 @@ HOMEPAGE         = "http://support.cdmatech.com"
 LICENSE          = "BSD-3-Clause-Clear"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
 
-SRC_URI   +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-sensor.git;protocol=https;rev=ac636cfd712b4ec4aab05bbfd576f1167dc843d2;branch=robotics.qclinux.1.0.r1-rel"
+SRC_URI   +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-sensor.git;protocol=https;rev=cc6df61ef46b9dc9c6169714ea0e7b69664f1fa8;branch=robotics.qclinux.1.0.r1-rel"
 S         =  "${WORKDIR}/git/qrb_ros_imu/"
 
 ROS_CN = "qrb_ros_imu"
@@ -56,8 +56,5 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEP
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-PACKAGES = "qirf-${PN}"
-
 ROS_BUILD_TYPE = "ament_cmake"
-
 inherit ros_${ROS_BUILD_TYPE}

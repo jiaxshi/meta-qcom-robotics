@@ -1,4 +1,4 @@
-inherit ros_distro_humble
+inherit ros_distro_${ROS_DISTRO}
 inherit ros_component
 
 DESCRIPTION = "The AMR bringup ROS2 package"
@@ -46,7 +46,7 @@ RDEPENDS:${PN} += " \
     libqrc-udriver \
 "
 
-SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=d51e600ab264971b0fe7e4d0425b03065244beaa;branch=robotics.qclinux.1.0.r1-rel"
+SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=a5b0e54e888928a3b410bbddb9cd446023e4ab7e;branch=robotics.qclinux.1.0.r1-rel"
 S =  "${WORKDIR}/git/robot-control/qti_robot_amr_ctrl/"
 
 ROS_BUILD_TYPE = "ament_cmake"

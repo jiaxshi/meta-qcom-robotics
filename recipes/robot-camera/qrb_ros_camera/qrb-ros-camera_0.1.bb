@@ -1,4 +1,4 @@
-inherit ros_distro_humble
+inherit ros_distro_${ROS_DISTRO}
 inherit ros_component robotics-package
 
 LICENSE  = "BSD-3-Clause-Clear"
@@ -61,7 +61,8 @@ EXTRA_OECMAKE  += "-DSYSROOT_LIBDIR=${RECIPE_SYSROOT}/usr/lib"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-PACKAGES = "qirf-${PN}"
-
 ROS_BUILD_TYPE = "ament_cmake"
 inherit ros_${ROS_BUILD_TYPE}
+
+FILES:${PN} += " \
+    ${pkg_dest}${includedir} "

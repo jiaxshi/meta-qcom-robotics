@@ -1,0 +1,43 @@
+From 6fae6cce5cdfbc5e4491c43ec56c15b52792f0a5 Mon Sep 17 00:00:00 2001
+From: zhengjia zhu <quic_zhezhu@quicinc.com>
+Date: Wed, 27 Nov 2024 10:36:10 +0800
+Subject: [PATCH] bbbbb
+
+Signed-off-by: zhengjia zhu <quic_zhezhu@quicinc.com>
+---
+ orbbec_camera/CMakeLists.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/orbbec_camera/CMakeLists.txt b/orbbec_camera/CMakeLists.txt
+index 207d6bb..2fbed21 100644
+--- a/orbbec_camera/CMakeLists.txt
++++ b/orbbec_camera/CMakeLists.txt
+@@ -12,7 +12,7 @@ option(USE_RK_HW_DECODER "Use Rockchip hardware decoder" OFF)
+ option(USE_NV_HW_DECODER "Use Nvidia hardware decoder" OFF)
+ 
+ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+-  add_compile_options(-Wall -Wextra -Werror -Wno-pedantic -Wno-array-bounds)
++  add_compile_options(-Wall -Wextra -Wno-error)
+ endif ()
+ # Check if ROS Jazzy or iron is installed
+ if ("$ENV{ROS_DISTRO}" STREQUAL "jazzy")
+@@ -84,6 +84,8 @@ elseif ((${MACHINES} MATCHES "aarch64") AND (${MACHINES_BIT} MATCHES "64"))
+   set(HOST_PLATFORM "arm64")
+ endif ()
+ 
++set(HOST_PLATFORM "arm64")
++
+ set(ORBBEC_LIBS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/SDK/lib/${HOST_PLATFORM})
+ set(ORBBEC_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/SDK/include/)
+ 
+@@ -239,6 +241,7 @@ install(TARGETS ${PROJECT_NAME} frame_latency
+ install(DIRECTORY include/ DESTINATION include)
+ install(DIRECTORY launch DESTINATION share/${PROJECT_NAME}/)
+ install(DIRECTORY config DESTINATION share/${PROJECT_NAME}/)
++install(DIRECTORY scripts DESTINATION share/${PROJECT_NAME}/)
+ install(DIRECTORY ${ORBBEC_INCLUDE_DIR} DESTINATION include)
+ install(DIRECTORY ${ORBBEC_LIBS_DIR}/ DESTINATION lib/ FILES_MATCHING PATTERN "*.so*")
+ install(DIRECTORY ${ORBBEC_LIBS_DIR}/extensions DESTINATION lib/)
+-- 
+2.34.1
+

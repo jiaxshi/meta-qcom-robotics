@@ -1,14 +1,51 @@
-inherit robotics-qprebuilt-package
+inherit ros_distro_${ROS_DISTRO}
+inherit ros_component robotics-package
 
-DESCRIPTION = "Ocr service msg type"
-LICENSE          = "Qualcomm-Technologies-Inc.-Proprietary"
-LIC_FILES_CHKSUM = "file://${QCOM_COMMON_LICENSE_DIR}/${LICENSE};md5=58d50a3d36f27f1a1e6089308a49b403"
+DESCRIPTION = "ocr service msg type"
 
-DEPENDS += "rclcpp sensor-msgs std-msgs ament-cmake-native rosidl-default-generators-native"
+HOMEPAGE         = "https://git.codelinaro.org/"
+LICENSE          = "BSD-3-Clause-Clear"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
 
-RDEPENDS:qirf-${PN}  = "rosidl-default-runtime rclpy sensor-msgs"
+SRC_URI   +=  "git://git.codelinaro.org/clo/le/qirp-oss.git;protocol=https;rev=750510465193ab62513e3d8e4121c74fdda159f5;branch=robotics-sdk.qclinux.1.0.r1-rel"
+S         =  "${WORKDIR}/git/samples/ai_nodes/ocr_service/ocr_msg/"
 
-PV = "1.0"
+ROS_CN = "ocr_msg"
+ROS_BPN = "ocr_msg"
 
-SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "151eacc324e82d52d1feb2cbdcdd0f094e8196bda8e2f53c0aab2fffb1cfee0e"
+ROS_BUILD_DEPENDS = " \
+    rclcpp \
+    sensor-msgs \
+    std-msgs \
+"
+
+ROS_BUILDTOOL_DEPENDS = " \
+    ament-cmake-native \
+    rosidl-default-generators-native \
+"
+
+ROS_EXPORT_DEPENDS = " \
+    rclcpp \
+"
+
+ROS_BUILDTOOL_EXPORT_DEPENDS = ""
+
+ROS_EXEC_DEPENDS = " \
+    rosidl-default-runtime \
+    rclcpp \
+    sensor-msgs \
+"
+
+ROS_TEST_DEPENDS = " \
+    ament-lint-auto \
+    ament-lint-common \
+    ament-cmake-gtest \
+"
+
+DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
+DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
+
+RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
+
+ROS_BUILD_TYPE = "ament_cmake"
+inherit ros_${ROS_BUILD_TYPE}

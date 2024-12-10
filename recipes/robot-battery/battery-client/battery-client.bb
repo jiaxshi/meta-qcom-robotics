@@ -24,6 +24,7 @@ INSANE_SKIP:${PN} = "dev-so"
 # need to export these variables for python-config to work
 FILES:${PN} += "${includedir}/*"
 FILES:${PN} += "/usr/lib/*"
+FILES:${PN} += "/usr/bin/*"
 FILES:${PN} += "/usr/lib64/*"
 FILES:${PN}-dev  = "${libdir}/*.la ${includedir}"
 FILES:${PN} += "${sysconfdir}/sensors/*"
@@ -34,9 +35,9 @@ SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
 do_install:append() {
-    install -m 0755 ${S}/battery_client_test -D ${D}/sbin/battery_client_test
+    install -m 0755 ${S}/battery_client_test -D ${D}/usr/bin/battery_client_test
     install -d ${D}/usr/include/
     install -m 0755 ${S}/inc/*.hpp -D ${D}/usr/include
 }
 
-PACKAGE_ARCH    ?= "${MACHINE_ARCH}"
+PACKAGE_ARCH    ?= "${SOC_ARCH}"

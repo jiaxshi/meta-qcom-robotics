@@ -22,6 +22,7 @@ INSANE_SKIP:${PN} = "dev-so"
 FILES:${PN} += "${includedir}/*"
 FILES:${PN} += "/usr/lib/*"
 FILES:${PN} += "/usr/bin/*"
+FILES:${PN} += "/sbin/*"
 FILES:${PN}-dev  = "${libdir}/*.la ${includedir}"
 FILES:${PN} += "${sysconfdir}/sensors/*"
 FILES:${PN} += "${systemd_unitdir}/system/"
@@ -30,7 +31,7 @@ RM_WORK_EXCLUDE += "${PN}"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-PACKAGE_ARCH    ?= "${MACHINE_ARCH}"
+PACKAGE_ARCH    ?= "${SOC_ARCH}"
 
 # adding user add packages
 USERADD_PACKAGES = "${PN}"
