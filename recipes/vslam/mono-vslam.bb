@@ -23,7 +23,7 @@ DEPENDS = " \
 PV = "1.0"
 
 SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "53dd0171361b621c302e98d5ec529a421a7748f8fccc7d312cab51fd3facd5fc"
+SRC_URI[sha256sum] = "7d978f6890256eb46edb24154cfa09686b727ef46b963983f6dd939fbe31d8b7"
 
 do_install:append() {
     rm -rf ${D}/usr/lib/*.so
