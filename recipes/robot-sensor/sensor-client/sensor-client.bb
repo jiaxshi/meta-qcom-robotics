@@ -1,4 +1,4 @@
-inherit pkgconfig autotools-brokensep
+inherit pkgconfig qprebuilt autotools-brokensep
 
 DESCRIPTION = "sensor client"
 LICENSE          = "BSD-3-Clause-Clear"

@@ -24,6 +24,7 @@ DEPENDS += " \
     nav2-msgs \
     nav-msgs \
     libqrc-udriver \
+    rosidl-core-generators \
 "
 
 RDEPENDS:${PN} += " \
@@ -44,9 +45,10 @@ RDEPENDS:${PN} += " \
     nav2-msgs \
     nav-msgs \
     libqrc-udriver \
+    rosidl-core-generators \
 "
 
-SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=a5b0e54e888928a3b410bbddb9cd446023e4ab7e;branch=robotics.qclinux.1.0.r1-rel"
+SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=f7e7b5a67d04bd2c22b5ca4c04b616ae797a31d4;branch=robotics.qclinux.1.0.r1-rel"
 S =  "${WORKDIR}/git/robot-control/qti_robot_amr_ctrl/"
 
 ROS_BUILD_TYPE = "ament_cmake"

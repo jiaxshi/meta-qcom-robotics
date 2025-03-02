@@ -7,7 +7,7 @@ AUTHOR = "Peng Wang <quic_penwang@quicinc.com>"
 ROS_AUTHOR = "Peng Wang"
 SECTION = "devel"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://../LICENSE;md5=65b8cd575e75211d9d4ca8603167da1c"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=86fcc2294062130b497ba0ffff9f82fc"
 
 ROS_CN = "qrb_ros_system_monitor"
 ROS_BPN = "qrb_ros_system_monitor"
@@ -44,7 +44,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEP
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 SRC_URI = "git://github.com/quic-qrb-ros/qrb_ros_system_monitor.git;protocol=https;branch=main"
-SRCREV = "ac55e55d275f977c5674cacef9450ee1abe885c9"
+SRCREV = "8680cbe57fc62a68f3e2d98f4e9b726bb8bce726"
 S = "${WORKDIR}/git/qrb_ros_system_monitor"
 
 ROS_BUILD_TYPE = "ament_cmake"

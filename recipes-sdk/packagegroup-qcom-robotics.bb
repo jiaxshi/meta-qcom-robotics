@@ -17,36 +17,50 @@ S = "${WORKDIR}"
 FUNCTION = " "
 BASIC_DEPENDENCY = " "
 
-FUNCTION:append:qcm6490:qcom-custom-bsp = " \
-${@bb.utils.contains('DISTRO_FEATURES', 'ros2-humble', ' \
-    librealsense2 \
+FUNCTION:append = " \
+    lib-mem-dmabuf \
+    qrb-sensor-client \
+    qrb-ros-transport-image-type \
+    qrb-ros-transport-imu-type \
+    qrb-ros-transport-point-cloud2-type \
+    qrb-colorspace-convert-lib \
+    qrb-ros-colorspace-convert \
+    dmabuf-transport \
+    qrb-ros-system-monitor \
+    qrb-ros-system-monitor-interfaces \
     rplidar-ros2 \
-    realsense2-camera \
-    realsense2-camera-msgs \
-    qrb-ros-imu \
-    qrb-ros-camera \
-    libqrc-udriver \
+"
+FUNCTION:append:qcom-custom-bsp = " \
     ocr-service \
     ocr-msg \
-    nav2-bringup \
+    libqrc-udriver \
     qrb-ros-battery \
-    qti-robot-urdf \
-    qti-robot-keyboard \
-    qti-robot-amr-ctrl \
     orbbec-description \
     orbbec-camera-msgs \
     orbbec-camera \
-    auto-explore \
-    mono-vslam \
-    depth-vslam \
-    voxel-map \
-    follow-me \
-    vio \
-    ', '', d)} \
+    qti-robot-urdf \
+    qti-robot-keyboard \
+    qti-robot-amr-ctrl \
+    qrb-ros-camera \
 "
-BASIC_DEPENDENCY:append:qcm6490:qcom-custom-bsp = " \
-    camxapi-kt-dev \
-    camxapi-kt \
+FUNCTION:remove:qcom-custom-bsp = " nav2-bringup qrb-ros-camera realsense2-camera realsense2-camera-msgs librealsense2 "
+FUNCTION:append:qcom-custom-bsp:qcm6490 = "qrb-ros-imu"
+
+#basic dependnecy for sdk buildtime and runtime
+BASIC_DEPENDENCY += " \
+    foonathan-memory \
+    foonathan-memory-dev \
+    foonathan-memory-staticdev \
+    opencv \
+    opencv-staticdev \
+    yaml-cpp \
+    zbar \
+    ncnn \
+    libgpiod \
+    graphviz \
+    ceres-solver \
+"
+BASIC_DEPENDENCY:append:qcom-custom-bsp = " \
     sensor-client \
     battery-client \
     battery-service \
@@ -54,80 +68,6 @@ BASIC_DEPENDENCY:append:qcm6490:qcom-custom-bsp = " \
     qcom-camera-server \
     ${GL_PROVIDER} \
     qcom-fastcv-binaries \
-"
-
-FUNCTION:append:qcs9100:qcom-custom-bsp = " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'ros2-humble', ' \
-    orbbec-description \
-    orbbec-camera-msgs \
-    orbbec-camera \
-    rplidar-ros2 \
-    ', '', d)} \
-"
-FUNCTION:append:qcs9100 = " \
-    lib-mem-dmabuf \
-    qrb-sensor-client \
-    qrb-ros-transport-image-type \
-    qrb-ros-transport-imu-type \
-    dmabuf-transport \
-    qrb-ros-system-monitor \
-    qrb-ros-system-monitor-interfaces \
-"
-
-#basic dependnecy for sdk buildtime and runtime
-BASIC_DEPENDENCY += " \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'ros2-humble', ' \
-    ament-cmake \
-    ament-cmake-auto \
-    ament-cmake-core \
-    ament-cmake-export-definitions \
-    ament-cmake-export-dependencies \
-    ament-cmake-export-include-directories \
-    ament-cmake-export-interfaces \
-    ament-cmake-export-libraries \
-    ament-cmake-export-link-flags \
-    ament-cmake-export-targets \
-    ament-cmake-gen-version-h \
-    ament-cmake-gmock \
-    ament-cmake-google-benchmark \
-    ament-cmake-gtest \
-    ament-cmake-include-directories \
-    ament-cmake-libraries \
-    ament-cmake-nose \
-    ament-cmake-pytest \
-    ament-cmake-python \
-    ament-cmake-ros \
-    ament-cmake-target-dependencies \
-    ament-cmake-test \
-    ament-cmake-version \
-    ament-lint-auto \
-    foonathan-memory \
-    foonathan-memory-dev \
-    foonathan-memory-staticdev \
-    opencv \
-    opencv-staticdev \
-    image-transport \
-    yaml-cpp \
-    camera-info-manager \
-    rclcpp \
-    sensor-msgs \
-    nav-msgs \
-    std-msgs \
-    geometry-msgs \
-    tf2 \
-    tf2-ros \
-    tf2-geometry-msgs \
-    cv-bridge \
-    rosidl-adapter \
-    ncnn \
-    rclcpp-components \
-    rcutils \
-    libgpiod \
-    xacro \
-    robot-state-publisher \
-    urdf-parser-plugin \
-    vision-msgs \
-    ', '', d)} \
 "
 
 RDEPENDS:${PN} = "${FUNCTION} ${BASIC_DEPENDENCY}"

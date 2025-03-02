@@ -1,0 +1,29 @@
+#This patch file is from Qualcomm Innovation Center, Inc. and is provided under the following license:
+#Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+#SPDX-License-Identifier: BSD-3-Clause-Clear
+From b14baff7ae11e7cef7b3dca3f1ebc59368d4fb0f Mon Sep 17 00:00:00 2001
+From: chenghen <quic_chenghen@quicinc.com>
+Date: Tue, 17 Dec 2024 20:31:06 +0800
+Subject: [PATCH] fix librealsense2 compilation issue with gcc13
+
+Signed-off-by: chenghen <quic_chenghen@quicinc.com>
+---
+ third-party/rsutils/include/rsutils/version.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/third-party/rsutils/include/rsutils/version.h b/third-party/rsutils/include/rsutils/version.h
+index bf8330cef..c3cb0e21d 100644
+--- a/third-party/rsutils/include/rsutils/version.h
++++ b/third-party/rsutils/include/rsutils/version.h
+@@ -5,7 +5,7 @@
+ 
+ #include <string>
+ #include <iosfwd>
+-
++#include <cstdint>
+ 
+ struct tm;
+ 
+-- 
+2.34.1
+
