@@ -59,6 +59,7 @@ BASIC_DEPENDENCY += " \
     libgpiod \
     graphviz \
     ceres-solver \
+    ${ROS_SDK_TARGET_PACKAGES} \
 "
 BASIC_DEPENDENCY:append:qcom-custom-bsp = " \
     sensor-client \

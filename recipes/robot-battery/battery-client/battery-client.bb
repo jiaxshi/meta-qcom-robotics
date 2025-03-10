@@ -1,4 +1,4 @@
-inherit pkgconfig qprebuilt autotools-brokensep
+inherit pkgconfig autotools-brokensep
 
 DESCRIPTION = "battery client"
 LICENSE          = "BSD-3-Clause-Clear"
