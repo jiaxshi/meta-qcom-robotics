@@ -32,14 +32,14 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 SRC_URI = "git://github.com/quic-qrb-ros/qrb_ros_color_space_convert.git;protocol=https;branch=main"
-SRCREV = "2ef28109c48bd2c092c3ad16845946b2ab9c0af4"
+SRCREV = "c57e8a86bf130d6b40e39c1b196d98dfed4e54be"
 S = "${WORKDIR}/git/qrb_colorspace_convert_lib"
 
 ROS_BUILD_TYPE = "ament_cmake"
 
 inherit ros_${ROS_BUILD_TYPE}
 
-EXTRA_OECMAKE:append = " -DBUILD_TESTING=ON"
+EXTRA_OECMAKE:append = " -DBUILD_TESTING=OFF"
 
 # for qirf
 inherit robotics-package

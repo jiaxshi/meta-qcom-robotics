@@ -1,0 +1,57 @@
+#This patch file is from Qualcomm Innovation Center, Inc. and is provided under the following license:
+#
+#Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
+#SPDX-License-Identifier: BSD-3-Clause-Clear
+From ae99634b1c829ccbb21b511eb65ddbe2ecb4b2d7 Mon Sep 17 00:00:00 2001
+From: Jiaxing Shi <quic_jiaxshi@quicinc.com>
+Date: Wed, 5 Mar 2025 10:49:17 +0800
+Subject: [PATCH] {jazzy}: remove outdated appends
+
+Fix ros bags convert runtime issue.
+Log:
+Error string: Could not load library dlopen error: /usr/lib/
+librosbag2_compression_zstd.so: undefined symbol: ZSTD_getFrameContentSize.
+
+Upstream-Status: Submitted
+
+Signed-off-by: Jiaxing Shi <quic_jiaxshi@quicinc.com>
+---
+ .../rosbag2/rosbag2-compression-zstd_0.26.5-1.bbappend   | 9 ---------
+ .../rosbag2/zstd-vendor_0.26.5-1.bbappend                | 9 ---------
+ 2 files changed, 18 deletions(-)
+ delete mode 100644 meta-ros2-jazzy/recipes-bbappends/rosbag2/rosbag2-compression-zstd_0.26.5-1.bbappend
+ delete mode 100644 meta-ros2-jazzy/recipes-bbappends/rosbag2/zstd-vendor_0.26.5-1.bbappend
+
+diff --git a/meta-ros2-jazzy/recipes-bbappends/rosbag2/rosbag2-compression-zstd_0.26.5-1.bbappend b/meta-ros2-jazzy/recipes-bbappends/rosbag2/rosbag2-compression-zstd_0.26.5-1.bbappend
+deleted file mode 100644
+index 60f28ad9f..000000000
+--- a/meta-ros2-jazzy/recipes-bbappends/rosbag2/rosbag2-compression-zstd_0.26.5-1.bbappend
++++ /dev/null
+@@ -1,9 +0,0 @@
+-# Copyright (c) 2020 LG Electronics, Inc.
+-
+-FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
+-SRC_URI += "file://0001-CMakeLists.txt-drop-dependency-on-zstd_vendor.patch"
+-
+-# PN package in zstd-vendor is empty and not created, remove runtime dependency on it
+-ROS_EXEC_DEPENDS:remove = "zstd-vendor"
+-
+-inherit pkgconfig
+diff --git a/meta-ros2-jazzy/recipes-bbappends/rosbag2/zstd-vendor_0.26.5-1.bbappend b/meta-ros2-jazzy/recipes-bbappends/rosbag2/zstd-vendor_0.26.5-1.bbappend
+deleted file mode 100644
+index 14dbaf96c..000000000
+--- a/meta-ros2-jazzy/recipes-bbappends/rosbag2/zstd-vendor_0.26.5-1.bbappend
++++ /dev/null
+@@ -1,9 +0,0 @@
+-# Copyright (c) 2020 LG Electronics, Inc.
+-# Copyright (c) 2023 Wind River Systems, Inc.
+-
+-FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
+-SRC_URI += "file://0001-CMakeLists.txt-prevent-building-zstd-with-ExternalPr.patch"
+-
+-inherit pkgconfig
+-
+-LICENSE = "Apache-2.0"
+-- 
+2.34.1
+

@@ -7,7 +7,7 @@ HOMEPAGE         = "https://git.codelinaro.org/"
 LICENSE          = "BSD-3-Clause-Clear"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
 
-SRC_URI   +=  "git://git.codelinaro.org/clo/le/qirp-oss.git;protocol=https;rev=19e621f99cd90e93143ef4b83715a14db60420f6;branch=robotics-sdk.qclinux.1.0.r1-rel"
+SRC_URI   +=  "git://git.codelinaro.org/clo/le/qirp-oss.git;protocol=https;rev=980029e2679ec94bc69e1e2a6e63e3a86c13e9e5;branch=robotics-sdk.qclinux.1.0.r1-rel"
 S         =  "${WORKDIR}/git/samples/ai_nodes/ocr_service/ocr_msg/"
 
 ROS_CN = "ocr_msg"

@@ -57,7 +57,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEP
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 SRC_URI = "git://github.com/quic-qrb-ros/qrb_ros_transport.git;protocol=https;branch=main"
-SRCREV = "6bf8688292154e575808f91a152b16e2e6369d79"
+SRCREV = "7be4596cf9a03bc72aaa6b53375cc119e4b7dcdd"
 S = "${WORKDIR}/git/qrb_ros_transport_image_type"
 
 ROS_BUILD_TYPE = "ament_cmake"
