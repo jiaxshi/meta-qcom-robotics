@@ -53,9 +53,9 @@ RDEPENDS:${PN} += " \
 RDEPENDS:${PN} += "dmabuf-transport"
 
 
-SRC_URI = "git://github.com/quic-qrb-ros/qrb_ros_transport.git;protocol=https;branch=main"
-SRCREV = "0cac37f4c8339fa5cc69e732adb4774b44ce51c2"
-S = "${WORKDIR}/qrb_ros_benchmark/"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_benchmark.git;protocol=https;branch=main"
+SRCREV = "c8ce1b1f5a202fddef40c54063f2f1134b40863d"
+S = "${WORKDIR}/git"
 
 
 ROS_BUILD_TYPE = "ament_cmake"

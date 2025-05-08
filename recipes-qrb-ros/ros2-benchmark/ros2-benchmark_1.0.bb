@@ -45,7 +45,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 SRC_URI = "git://github.com/qualcomm-qrb-ros/ros2_benchmark.git;branch=jazzy;protocol=https;lfs=0"
-SRCREV = "92d0dabc4dcb2582fffec7a3342682997da96860"
+SRCREV = "c06e10927371f4933c740e87b42baecfe220705f"
 S = "${WORKDIR}/git/ros2_benchmark"
 
 ROS_BUILD_TYPE = "ament_cmake"
