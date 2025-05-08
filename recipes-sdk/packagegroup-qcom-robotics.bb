@@ -25,6 +25,7 @@ FUNCTION:append = " \
     qrb-ros-transport-point-cloud2-type \
     qrb-colorspace-convert-lib \
     qrb-ros-colorspace-convert \
+    qrb-ros-benchmark \
     dmabuf-transport \
     qrb-ros-system-monitor \
     qrb-ros-system-monitor-interfaces \
