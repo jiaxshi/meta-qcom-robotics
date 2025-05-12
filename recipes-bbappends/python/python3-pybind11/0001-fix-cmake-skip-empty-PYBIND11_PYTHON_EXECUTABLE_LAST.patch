@@ -1,0 +1,51 @@
+From aec6cc5406edb076f5a489c2d7f84bb07052c4a3 Mon Sep 17 00:00:00 2001
+From: Ilya Lavrenov <ilya.lavrenov@intel.com>
+Date: Mon, 8 Jan 2024 17:40:41 +0400
+Subject: [PATCH] fix(cmake): skip empty PYBIND11_PYTHON_EXECUTABLE_LAST for
+ the first cmake run (#4856)
+
+* fix(cmake): skip empty PYBIND11_PYTHON_EXECUTABLE_LAST for the first cmake run
+
+* style: pre-commit fixes
+
+* Update pybind11NewTools.cmake
+
+* style: pre-commit fixes
+
+---------
+
+Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+Co-authored-by: Henry Schreiner <HenrySchreinerIII@gmail.com>
+---
+ tools/pybind11NewTools.cmake | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/tools/pybind11NewTools.cmake b/tools/pybind11NewTools.cmake
+index cd88a64..9fe2eb0 100644
+--- a/tools/pybind11NewTools.cmake
++++ b/tools/pybind11NewTools.cmake
+@@ -110,15 +110,17 @@ if(NOT DEFINED ${_Python}_EXECUTABLE)
+ 
+ endif()
+ 
+-if(NOT ${_Python}_EXECUTABLE STREQUAL PYBIND11_PYTHON_EXECUTABLE_LAST)
++if(DEFINED PYBIND11_PYTHON_EXECUTABLE_LAST AND NOT ${_Python}_EXECUTABLE STREQUAL
++                                               PYBIND11_PYTHON_EXECUTABLE_LAST)
+   # Detect changes to the Python version/binary in subsequent CMake runs, and refresh config if needed
+   unset(PYTHON_IS_DEBUG CACHE)
+   unset(PYTHON_MODULE_EXTENSION CACHE)
+-  set(PYBIND11_PYTHON_EXECUTABLE_LAST
+-      "${${_Python}_EXECUTABLE}"
+-      CACHE INTERNAL "Python executable during the last CMake run")
+ endif()
+ 
++set(PYBIND11_PYTHON_EXECUTABLE_LAST
++    "${${_Python}_EXECUTABLE}"
++    CACHE INTERNAL "Python executable during the last CMake run")
++
+ if(NOT DEFINED PYTHON_IS_DEBUG)
+   # Debug check - see https://stackoverflow.com/questions/646518/python-how-to-detect-debug-Interpreter
+   execute_process(
+-- 
+2.7.4
+

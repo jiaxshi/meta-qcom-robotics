@@ -10,4 +10,4 @@ patches:
   poky:
     path: "layers/poky"
     patches:
-      - patch_url: "https://git.yoctoproject.org/poky/patch/meta/files/common-licenses/BSD?id=4bda50f28919d62410feabae530e6f7186812938"
+      - patch_path: "layers/meta-qcom-robotics/patches/Initial-commit-of-license.patch"
