@@ -77,14 +77,6 @@ FUNCTION:append:qcom-custom-bsp = " \
 # enable sample packages enabled by default
 FUNCTION:append:qcom-custom-bsp = " \
     sample-hand-detection \
-    sample-resnet101-quantized \
-    simulation-sample-amr-simple-motion \
-"
-
-# enable sample packages enabled by default
-FUNCTION:append:qcom-custom-bsp = " \
-    sample-hand-detection \
-    sample-resnet101-quantized \
     simulation-sample-amr-simple-motion \
 "
 
