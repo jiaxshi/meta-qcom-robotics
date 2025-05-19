@@ -67,6 +67,18 @@ FUNCTION:append:qcom-custom-bsp = " \
     qrb-ros-follow-path \
     qrb-amr-manager \
     qrb-ros-amr \
+    ros-gst-bridge-audio-msgs \
+    ros-gst-bridge-msgs \
+    ros-gst-bridge \
+    ros-gst-bridge-pipeline \
+    ros-gst-bridge-pipeline-plugins \
+"
+
+# enable sample packages enabled by default
+FUNCTION:append:qcom-custom-bsp = " \
+    sample-hand-detection \
+    sample-resnet101-quantized \
+    simulation-sample-amr-simple-motion \
 "
 
 # enable sample packages enabled by default
@@ -107,3 +119,4 @@ BASIC_DEPENDENCY:append:qcom-custom-bsp:qcm6490 = " camxapi-kt-dev "
 RDEPENDS:${PN} = "${FUNCTION} ${BASIC_DEPENDENCY}"
 
 do_package_qa[noexec] = "1"
+
