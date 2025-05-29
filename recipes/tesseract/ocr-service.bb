@@ -7,7 +7,7 @@ HOMEPAGE         = "https://git.codelinaro.org/"
 LICENSE          = "BSD-3-Clause-Clear"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
 
-SRC_URI   +=  "git://git.codelinaro.org/clo/le/qirp-oss.git;protocol=https;rev=980029e2679ec94bc69e1e2a6e63e3a86c13e9e5;branch=robotics-sdk.qclinux.1.0.r1-rel"
+SRC_URI   +=  "git://git.codelinaro.org/clo/le/qirp-oss.git;protocol=https;rev=f09dc67edf91484b6223ca90307cf4a88ab02276;branch=robotics-sdk.qclinux.1.0.r1-rel"
 S         =  "${WORKDIR}/git/samples/ai_nodes/ocr_service/ocr_ros2node/"
 
 ROS_CN = "ocr_service"
@@ -38,7 +38,6 @@ ROS_EXEC_DEPENDS = " \
     python3-numpy \
     tesseract \
 "
-# temp change for qirf sdk 
 ROS_EXEC_DEPENDS += " ocr-msg "
 
 ROS_TEST_DEPENDS = " \
@@ -54,4 +53,3 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 ROS_BUILD_TYPE = "ament_python"
 inherit ros_${ROS_BUILD_TYPE}
-

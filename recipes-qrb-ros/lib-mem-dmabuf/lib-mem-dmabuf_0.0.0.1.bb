@@ -32,7 +32,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-SRC_URI = "git://github.com/quic-qrb-ros/lib_mem_dmabuf.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/lib_mem_dmabuf.git;protocol=https;branch=main"
 SRCREV = "3c958cf85a6d91583e8fc4d42af8a35ce034f322"
 S = "${WORKDIR}/git"
 
@@ -40,5 +40,4 @@ ROS_BUILD_TYPE = "ament_cmake"
 
 inherit ros_${ROS_BUILD_TYPE}
 
-# for qirf
 inherit robotics-package

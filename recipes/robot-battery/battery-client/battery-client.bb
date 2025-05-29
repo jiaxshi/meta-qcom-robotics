@@ -1,44 +1,46 @@
-inherit pkgconfig autotools-brokensep
+inherit ros_distro_${ROS_DISTRO} pkgconfig
+inherit ros_component
+inherit ros_insane_dev_so
 
 DESCRIPTION = "battery client"
 LICENSE          = "BSD-3-Clause-Clear"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
 
+ROS_CN = "qrb_battery_client"
+ROS_BPN = "qrb_battery_client"
 
-DEPENDS += "dbus"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_battery.git;protocol=https;branch=main"
+SRCREV = "11833cc3d7253fde29c07360ccd3fe6f703a7c9b"
+S = "${WORKDIR}/git/qrb_battery_client"
 
-SRC_URI += "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-battery.git;protocol=https;rev=cb5e2cea40f53509ffa15dbf65f19727ad2da804;branch=robotics.qclinux.1.0.r1-rel"
-S = "${WORKDIR}/git/battery-client"
+ROS_BUILD_DEPENDS = " \
+    dbus \
+"
 
-EXTRA_OECONF += " --with-sanitized-headers=${STAGING_KERNEL_BUILDDIR}/usr/include"
-EXTRA_OECONF += " --with-glib"
+ROS_BUILDTOOL_DEPENDS = " \
+    ament-cmake-auto-native \
+"
 
-#Disable the split of debug information into -dbg files
-INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+ROS_EXPORT_DEPENDS = " \
+"
 
-FILES:${PN} += "${libdir}/*"
-FILES:${PN}-dev = "${libdir}/* ${includedir}"
+ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 
-#Skips check for .so symlinks
-INSANE_SKIP:${PN} = "dev-so"
+ROS_EXEC_DEPENDS = " \
+"
 
-# need to export these variables for python-config to work
-FILES:${PN} += "${includedir}/*"
-FILES:${PN} += "/usr/lib/*"
-FILES:${PN} += "/usr/bin/*"
-FILES:${PN} += "/usr/lib64/*"
-FILES:${PN}-dev  = "${libdir}/*.la ${includedir}"
-FILES:${PN} += "${sysconfdir}/sensors/*"
-FILES:${PN} += "${systemd_unitdir}/system/"
-FILES:${PN} += "/systemd/system/*"
-RM_WORK_EXCLUDE += "${PN}"
-SOLIBS = ".so"
-FILES_SOLIBSDEV = ""
+ROS_TEST_DEPENDS = " \
+    ament-lint-auto \
+    ament-lint-common \
+"
 
-do_install:append() {
-    install -m 0755 ${S}/battery_client_test -D ${D}/usr/bin/battery_client_test
-    install -d ${D}/usr/include/
-    install -m 0755 ${S}/inc/*.hpp -D ${D}/usr/include
-}
+DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
+DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEPENDS}"
 
-PACKAGE_ARCH    ?= "${SOC_ARCH}"
+RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
+
+ROS_BUILD_TYPE = "ament_cmake"
+
+inherit ros_${ROS_BUILD_TYPE}
+
+inherit robotics-package

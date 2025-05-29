@@ -61,7 +61,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEP
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-SRC_URI = "git://github.com/quic-qrb-ros/dmabuf_transport.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/dmabuf_transport.git;protocol=https;branch=main"
 SRCREV = "94016354991c16e75e1311e9ad4b698724886773"
 S = "${WORKDIR}/git"
 
@@ -71,5 +71,4 @@ inherit ros_${ROS_BUILD_TYPE}
 
 EXTRA_OECMAKE:append = " -DBUILD_TESTING=ON"
 
-# for qirf
 inherit robotics-package

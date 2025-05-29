@@ -1,0 +1,36 @@
+# This patch file is from Qualcomm Innovation Center, Inc. and is provided under the following license:
+# Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
+# SPDX-License-Identifier: BSD-3-Clause-Clear
+
+From cb6d2a403fdde6efb436742c52fe053c504206e3 Mon Sep 17 00:00:00 2001
+From: Na Song <quic_nasong@quicinc.com>
+Date: Mon, 31 Mar 2025 19:15:08 +0800
+Subject: [PATCH] adapt for 9100 FR
+
+Signed-off-by: Na Song <quic_nasong@quicinc.com>
+---
+ CMakeLists.txt | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 661acb5..4e53731 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -12,14 +12,8 @@ endif()
+ find_package(ament_cmake_auto REQUIRED)
+ ament_auto_find_build_dependencies()
+
+-if(NOT DEFINED ENV{TENSORFLOW_SOURCE_DIR})
+-  set(ENV{TENSORFLOW_SOURCE_DIR} "/opt/tensorflow")
+-endif()
+-
+ include_directories(
+   include
+-  $ENV{TENSORFLOW_SOURCE_DIR}
+-  $ENV{TENSORFLOW_SOURCE_DIR}/tflite-build/flatbuffers/include/
+ )
+
+ set(SOURCES
+--
+2.34.1
+

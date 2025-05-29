@@ -1,0 +1,33 @@
+#This patch file is from Qualcomm Innovation Center, Inc. and is provided under the following license:
+#
+#Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
+#SPDX-License-Identifier: BSD-3-Clause-Clear
+From 60f9d06e3c633fe8a938bff68f79c35b1ad70946 Mon Sep 17 00:00:00 2001
+From: Jie Yu <quic_yuji@quicinc.com>
+Date: Thu, 10 Apr 2025 13:02:10 +0800
+Subject: [PATCH] modify CMakeLists to solve Werror
+
+Signed-off-by: Jie Yu <quic_yuji@quicinc.com>
+
+---
+ CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 385ae96fb..69113232d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.16)
+ project(hardware_interface LANGUAGES CXX)
+
+ if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
+-  add_compile_options(-Wall -Wextra -Werror=conversion -Werror=unused-but-set-variable -Werror=return-type -Werror=shadow
+-          -Werror=missing-braces)
++  add_compile_options(-Wall -Wextra -Werror=conversion -Werror=unused-but-set-variable -Werror=return-type -Wno-error=shadow
++          -Wno-error=missing-braces)
+ endif()
+
+ set(THIS_PACKAGE_INCLUDE_DEPENDS
+--
+2.34.1
+

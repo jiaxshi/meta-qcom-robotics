@@ -14,7 +14,7 @@ DEPENDS += "libbsd"
 RDEPENDS:${PN} += "jsoncpp"
 
 SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "0058fba3012124031e004527c050bc5b78ef9286339ad886e1545ae8426573c1"
+SRC_URI[sha256sum] = "bdfb11f809dff9ce69b7a2d09a4f692e26a5b031f56ca9b52c9cd4f29345d804"
 
 S = "${WORKDIR}/sensor-service"
 
