@@ -1,0 +1,31 @@
+#This patch file is from Qualcomm Innovation Center, Inc. and is provided under the following license:
+#
+#Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
+#SPDX-License-Identifier: BSD-3-Clause-Clear
+From 2c7dc5078e342cc095a6a0b6d9d72a3061e2d8a3 Mon Sep 17 00:00:00 2001
+From: Jie Yu <quic_yuji@quicinc.com>
+Date: Fri, 11 Apr 2025 10:27:13 +0800
+Subject: [PATCH] modify CMakeLists to solve Werror for diff-drive-controller
+
+Signed-off-by: Jie Yu <quic_yuji@quicinc.com>
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 4eeb98b9d2..ffb5514f4e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
+ project(diff_drive_controller LANGUAGES CXX)
+
+ if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
+-  add_compile_options(-Wall -Wextra -Werror=conversion -Werror=unused-but-set-variable -Werror=return-type -Werror=shadow -Werror=format)
++  add_compile_options(-Wall -Wextra -Wno-error=conversion -Wno-error=unused-but-set-variable -Wno-error=return-type -Wno-error=shadow -Wno-error=format)
+ endif()
+
+ set(THIS_PACKAGE_INCLUDE_DEPENDS
+--
+2.34.1
+

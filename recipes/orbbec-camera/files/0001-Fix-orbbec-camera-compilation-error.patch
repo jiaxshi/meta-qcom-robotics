@@ -86,7 +86,7 @@ index 126d526..f2ea19f 100644
 -        DeclareLaunchArgument('depth_height', default_value='0'),
 -        DeclareLaunchArgument('depth_fps', default_value='0'),
 +        DeclareLaunchArgument('depth_width', default_value='640'),
-+        DeclareLaunchArgument('depth_height', default_value='400'),
++        DeclareLaunchArgument('depth_height', default_value='480'),
 +        DeclareLaunchArgument('depth_fps', default_value='15'),
          DeclareLaunchArgument('depth_format', default_value='ANY'),
          DeclareLaunchArgument('enable_depth', default_value='true'),

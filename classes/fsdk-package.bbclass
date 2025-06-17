@@ -1,3 +1,6 @@
+# Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
+# SPDX-License-Identifier: BSD-3-Clause-Clear
+
 SSTATETASKS += "do_generate_robotics_sdk "
 
 SSTATE_OUT_DIR = "${DEPLOY_DIR}/${TARGET_SDK}sdk_artifacts/"

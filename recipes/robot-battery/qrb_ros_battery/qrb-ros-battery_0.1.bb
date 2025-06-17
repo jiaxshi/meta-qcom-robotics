@@ -1,4 +1,4 @@
-inherit ros_distro_${ROS_DISTRO}
+inherit ros_distro_${ROS_DISTRO} pkgconfig
 inherit ros_component robotics-package
 
 DESCRIPTION = "qrb ros battery"
@@ -7,8 +7,9 @@ HOMEPAGE         = "http://support.cdmatech.com"
 LICENSE          = "BSD-3-Clause-Clear"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
 
-SRC_URI += "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-battery.git;protocol=https;rev=cb5e2cea40f53509ffa15dbf65f19727ad2da804;branch=robotics.qclinux.1.0.r1-rel"
-S =  "${WORKDIR}/git/qrb_ros_battery/"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_battery.git;protocol=https;branch=main"
+SRCREV = "11833cc3d7253fde29c07360ccd3fe6f703a7c9b"
+S = "${WORKDIR}/git/qrb_ros_battery"
 
 ROS_CN = "qrb_ros_battery"
 ROS_BPN = "qrb_ros_battery"
@@ -21,7 +22,7 @@ ROS_BUILD_DEPENDS = " \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
-    ament-cmake-native \
+    ament-cmake-auto-native \
 "
 
 ROS_EXPORT_DEPENDS = " \
@@ -41,6 +42,14 @@ ROS_TEST_DEPENDS = " \
     ament-lint-auto \
     ament-lint-common \
     ament-cmake-gtest \
+    ament-cmake-copyright \
+    ament-cmake-cppcheck \
+    ament-cmake-cpplint \
+    ament-cmake-flake8 \
+    ament-cmake-lint-cmake \
+    ament-cmake-pep257 \
+    ament-cmake-uncrustify \
+    ament-cmake-xmllint \
 "
 
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
@@ -57,4 +66,3 @@ RDEPENDS:${PN} += "dbus"
 
 ROS_BUILD_TYPE = "ament_cmake"
 inherit ros_${ROS_BUILD_TYPE}
-

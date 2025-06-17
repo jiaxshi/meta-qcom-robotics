@@ -43,7 +43,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEP
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-SRC_URI = "git://github.com/quic-qrb-ros/qrb_ros_system_monitor.git;protocol=https;branch=main"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_system_monitor.git;protocol=https;branch=main"
 SRCREV = "8680cbe57fc62a68f3e2d98f4e9b726bb8bce726"
 S = "${WORKDIR}/git/qrb_ros_system_monitor"
 
@@ -51,5 +51,4 @@ ROS_BUILD_TYPE = "ament_cmake"
 
 inherit ros_${ROS_BUILD_TYPE}
 
-# for qirf
 inherit robotics-package

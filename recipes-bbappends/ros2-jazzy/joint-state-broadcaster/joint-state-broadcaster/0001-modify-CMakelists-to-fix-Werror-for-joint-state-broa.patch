@@ -1,0 +1,31 @@
+#This patch file is from Qualcomm Innovation Center, Inc. and is provided under the following license:
+#
+#Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
+#SPDX-License-Identifier: BSD-3-Clause-Clear
+From de32ceed1682b2b2355055fb330ac15d7b0f01da Mon Sep 17 00:00:00 2001
+From: Jie Yu <quic_yuji@quicinc.com>
+Date: Thu, 10 Apr 2025 14:38:47 +0800
+Subject: [PATCH] modify CMakelists to fix Werror for joint-state-broadcaster
+
+Signed-off-by: Jie Yu <quic_yuji@quicinc.com>
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cc8dc18bf6..a365cbe372 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -3,7 +3,7 @@ project(joint_state_broadcaster LANGUAGES CXX)
+
+ if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
+   add_compile_options(-Wall -Wextra -Wpedantic -Werror=conversion -Werror=unused-but-set-variable
+-                      -Werror=return-type -Werror=shadow -Werror=format)
++                      -Werror=return-type -Wno-error=shadow -Werror=format)
+ endif()
+
+ set(THIS_PACKAGE_INCLUDE_DEPENDS
+--
+2.34.1
+

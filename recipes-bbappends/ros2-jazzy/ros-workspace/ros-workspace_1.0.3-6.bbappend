@@ -38,7 +38,7 @@ do_install:append() {
 
     mkdir -p ${D}${bindir}
     for f in *setup.bash *setup.zsh *setup.sh; do
-        ln -s $profile_dir/$f ${D}${bindir}/ros_$f
+        ln -sf $profile_dir/$f ${D}${bindir}/ros_$f
     done
 
     echo ". $profile_dir/setup.sh" > ../ros.sh

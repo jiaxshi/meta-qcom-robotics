@@ -29,22 +29,53 @@ FUNCTION:append = " \
     qrb-ros-system-monitor \
     qrb-ros-system-monitor-interfaces \
     rplidar-ros2 \
+    qrb-audio-common-lib \
+    qrb-audio-service-lib \
+    qrb-ros-audio-common \
+    qrb-ros-audio-common-msgs \
+    qrb-ros-audio-service \
+    qrb-ros-audio-service-msgs \
 "
 FUNCTION:append:qcom-custom-bsp = " \
     ocr-service \
     ocr-msg \
     libqrc-udriver \
+    libqrc \
+    cartographer-ros \
     qrb-ros-battery \
     orbbec-description \
     orbbec-camera-msgs \
     orbbec-camera \
-    qti-robot-urdf \
-    qti-robot-keyboard \
-    qti-robot-amr-ctrl \
     qrb-ros-camera \
+    ugv-sdk \
+    ranger-mini-msg \
+    ranger-mini-base \
+    ranger-mini-bringup \
+    qrb-robot-base-manager \
+    qrb-ros-robot-base-keyboard \
+    qrb-ros-robot-base-urdf \
+    qrb-ros-robot-base \
+    qrb-ros-video \
+    qrb-ros-nn-inference \
+    qrb-yolo-process-lib \
+    qrb-ros-yolo-process \
+    qrb-ros-cv-tensor-common-process \
+    nav2-bringup \
+    qrb-ros-docker \
+    qrb-follow-path-manager \
+    qrb-ros-follow-path \
+    qrb-amr-manager \
+    qrb-ros-amr \
 "
-FUNCTION:remove:qcom-custom-bsp = " nav2-bringup qrb-ros-camera realsense2-camera realsense2-camera-msgs librealsense2 "
-FUNCTION:append:qcom-custom-bsp:qcm6490 = "qrb-ros-imu"
+
+# enable sample packages enabled by default
+FUNCTION:append:qcom-custom-bsp = " \
+    sample-hand-detection \
+    sample-resnet101-quantized \
+    simulation-sample-amr-simple-motion \
+"
+FUNCTION:remove:qcom-custom-bsp = " realsense2-camera realsense2-camera-msgs librealsense2 "
+FUNCTION:append:qcom-custom-bsp:qcm6490 = " qrb-ros-imu "
 
 #basic dependnecy for sdk buildtime and runtime
 BASIC_DEPENDENCY += " \
@@ -70,6 +101,7 @@ BASIC_DEPENDENCY:append:qcom-custom-bsp = " \
     ${GL_PROVIDER} \
     qcom-fastcv-binaries \
 "
+BASIC_DEPENDENCY:append:qcom-custom-bsp:qcm6490 = " camxapi-kt-dev "
 
 RDEPENDS:${PN} = "${FUNCTION} ${BASIC_DEPENDENCY}"
 

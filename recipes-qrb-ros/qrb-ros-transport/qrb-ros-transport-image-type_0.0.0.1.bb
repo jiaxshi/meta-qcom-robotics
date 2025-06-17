@@ -56,8 +56,8 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEP
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-SRC_URI = "git://github.com/quic-qrb-ros/qrb_ros_transport.git;protocol=https;branch=main"
-SRCREV = "7be4596cf9a03bc72aaa6b53375cc119e4b7dcdd"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_transport.git;protocol=https;branch=main"
+SRCREV = "d3d02cbb7c82bef085bc4c7930fb5eef7374155c"
 S = "${WORKDIR}/git/qrb_ros_transport_image_type"
 
 ROS_BUILD_TYPE = "ament_cmake"
@@ -66,5 +66,4 @@ inherit ros_${ROS_BUILD_TYPE}
 
 EXTRA_OECMAKE:append = " -DBUILD_TESTING=ON"
 
-# for qirf
 inherit robotics-package
