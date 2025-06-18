@@ -1,17 +1,17 @@
 inherit ros_distro_${ROS_DISTRO}
-inherit ros_component robotics-package
+inherit ros_component robotics-package pkgconfig
 
-LICENSE  = "BSD-3-Clause-Clear"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
+LICENSE  = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=550794465ba0ec5312d6919e203a55f9"
 
-SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_camera.git;protocol=https;branch=main"
-SRCREV = "5d50f75d2a0619c1abf85c1a4baa8be882028e45"
-S = "${WORKDIR}/git"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_camera.git;protocol=https;branch=main;subpath=qrb_ros_camera"
+SRCREV = "cdc4908b348f8eecfb0e3cb8c1bba786d2fc0c98"
+S = "${WORKDIR}/qrb_ros_camera"
 
 # Dependencies
 CAMERA_ROS2_NODE_DEPENDS = " \
-    qcom-camera-server \
     qrb-ros-transport-image-type \
+    qrb-camera \
 "
 
 ROS_BUILD_DEPENDS = " \
@@ -20,7 +20,6 @@ ROS_BUILD_DEPENDS = " \
     rclcpp-components \
     cv-bridge \
     yaml-cpp \
-    glib-2.0 \
     image-transport \
     camera-info-manager \
 "
@@ -35,7 +34,6 @@ ROS_EXEC_DEPENDS = " \
     rclcpp \
     rclcpp-components \
     sensor-msgs \
-    qcom-camera-server \
     qrb-ros-transport-image-type \
 "
 ROS_TEST_DEPENDS = " \
@@ -69,3 +67,6 @@ inherit ros_${ROS_BUILD_TYPE}
 
 FILES:${PN} += " \
     ${pkg_dest}${includedir} "
+
+EXTRA_OECMAKE:append = " -DBUILD_TESTING=ON"
+
