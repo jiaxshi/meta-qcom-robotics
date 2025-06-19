@@ -10,7 +10,13 @@ RDEPENDS:{PN} += " \
     rclpy \
 "
 
-SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=ce63524de87702fc12c6bcbad68e47daccdcc146;branch=robotics.qclinux.1.0.r1-rel"
+SRCPROJECT = "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https"
+SRCBRANCH  = "robotics.qclinux.1.0.r1-rel"
+SRCREV     = "ce63524de87702fc12c6bcbad68e47daccdcc146"
+
+SRC_URI +=   "${SRCPROJECT};branch=${SRCBRANCH}"
+
+# SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=ce63524de87702fc12c6bcbad68e47daccdcc146;branch=robotics.qclinux.1.0.r1-rel"
 S =  "${WORKDIR}/git/robot-control/qti_robot_keyboard/"
 
 ROS_BUILD_TYPE = "ament_python"
