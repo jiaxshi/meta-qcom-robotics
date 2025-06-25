@@ -12,7 +12,7 @@ ROS_CN = "qrb_ros_docker"
 ROS_BPN = "qrb_ros_docker"
 
 SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_docker.git;protocol=https;branch=main"
-SRCREV = "f3ce52811015a451665a3b6a70f1d1f7a11c44cc"
+SRCREV = "2af941b7b17feabc5d200c73cfa7c05569e24a6e"
 S = "${WORKDIR}/git/"
 
 do_install() {

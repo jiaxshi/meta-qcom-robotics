@@ -75,7 +75,7 @@ FUNCTION:append:qcom-custom-bsp = " \
     simulation-sample-amr-simple-motion \
 "
 FUNCTION:remove:qcom-custom-bsp = " realsense2-camera realsense2-camera-msgs librealsense2 "
-FUNCTION:append:qcom-custom-bsp:qcm6490 = " qrb-ros-imu "
+FUNCTION:append:qcom-custom-bsp:qcm6490 = " qrb-ros-imu follow-me "
 
 #basic dependnecy for sdk buildtime and runtime
 BASIC_DEPENDENCY += " \
