@@ -2,19 +2,17 @@ inherit ros_distro_${ROS_DISTRO}
 inherit ros_component
 inherit ros_insane_dev_so
 
-DESCRIPTION = "QRB Follow Path Library"
+DESCRIPTION      = "QRB AMR Library"
 AUTHOR           = "Xiaowei Zhang <quic_xiaowz@quicinc.com>"
 ROS_AUTHOR       = "Xiaowei Zhang"
 SECTION          = "devel"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://../LICENSE;md5=86fcc2294062130b497ba0ffff9f82fc"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=ad92c59628114dbd93a5031a4e684080"
 
-ROS_CN = "qrb_follow_path_manager"
-ROS_BPN = "qrb_follow_path_manager"
+ROS_CN = "qrb_amr_manager"
+ROS_BPN = "qrb_amr_manager"
 
 ROS_BUILD_DEPENDS = " \
-    libeigen \
-    libtinyxml2 \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
@@ -22,13 +20,9 @@ ROS_BUILDTOOL_DEPENDS = " \
 "
 
 ROS_EXEC_DEPENDS = " \
-    libeigen \
-    libtinyxml2 \
 "
 
 ROS_EXPORT_DEPENDS = " \
-    libeigen \
-    libtinyxml2 \
 "
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
@@ -41,9 +35,9 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS} ${NON_ROS_EXEC_DEPENDS}"
 
-SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_follow_path_service.git;protocol=https;branch=main"
-SRCREV = "2893772b20021c767b2d3be85293f39c2f1cdd8d"
-S = "${WORKDIR}/git/qrb_follow_path_manager"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_amr_service.git;protocol=https;branch=main"
+SRCREV = "4c0e20ab9b3928d1c011a78c0196b39cb5d9fca8"
+S = "${WORKDIR}/git/qrb_amr_manager"
 
 ROS_BUILD_TYPE = "ament_cmake"
 do_package_qa[noexec] = "1"
