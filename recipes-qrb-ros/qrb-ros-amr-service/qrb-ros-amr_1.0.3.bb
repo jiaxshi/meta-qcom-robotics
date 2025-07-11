@@ -1,15 +1,15 @@
 inherit ros_distro_${ROS_DISTRO}
 inherit ros_component
 
-DESCRIPTION = "QRB Follow Path ROS node"
+DESCRIPTION      = "QRB AMR ROS node"
 AUTHOR           = "Xiaowei Zhang <quic_xiaowz@quicinc.com>"
 ROS_AUTHOR       = "Xiaowei Zhang"
 SECTION          = "devel"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://../LICENSE;md5=86fcc2294062130b497ba0ffff9f82fc"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=ad92c59628114dbd93a5031a4e684080"
 
-ROS_CN = "qrb_ros_follow_path"
-ROS_BPN = "qrb_ros_follow_path"
+ROS_CN = "qrb_ros_amr"
+ROS_BPN = "qrb_ros_amr"
 
 ROS_BUILD_DEPENDS = " \
     rclcpp \
@@ -17,18 +17,19 @@ ROS_BUILD_DEPENDS = " \
     rclcpp-components \
     nav-msgs \
     nav2-msgs \
-    sensor-msgs \
+    nav-2d-msgs \
     geometry-msgs \
     rclcpp-action \
     tf2 \
-    nav-2d-msgs \
     tf2-ros \
     tf2-geometry-msgs \
-    rclcpp-lifecycle \
+    sensor-msgs \
+    jsoncpp \
     qrb-ros-amr-msgs \
     qrb-ros-navigation-msgs \
-    qrb-follow-path-manager \
+    qrb-amr-manager \
     qrb-ros-robot-base-msgs \
+    qrb-ros-slam-msgs \
 "
 
 ROS_BUILDTOOL_DEPENDS = " \
@@ -41,14 +42,13 @@ ROS_EXEC_DEPENDS = " \
     rclcpp-components \
     nav-msgs \
     nav2-msgs \
-    sensor-msgs \
+    nav-2d-msgs \
     geometry-msgs \
     rclcpp-action \
     tf2 \
-    nav-2d-msgs \
     tf2-ros \
     tf2-geometry-msgs \
-    rclcpp-lifecycle \
+    sensor-msgs \
 "
 
 ROS_EXPORT_DEPENDS = " \
@@ -57,21 +57,22 @@ ROS_EXPORT_DEPENDS = " \
     rclcpp-components \
     nav-msgs \
     nav2-msgs \
-    sensor-msgs \
+    nav-2d-msgs \
     geometry-msgs \
     rclcpp-action \
     tf2 \
-    nav-2d-msgs \
     tf2-ros \
     tf2-geometry-msgs \
-    rclcpp-lifecycle \
+    sensor-msgs \
 "
 
 NON_ROS_EXEC_DEPENDS = " \
+    jsoncpp \
     qrb-ros-amr-msgs \
     qrb-ros-navigation-msgs \
-    qrb-follow-path-manager \
+    qrb-amr-manager \
     qrb-ros-robot-base-msgs \
+    qrb-ros-slam-msgs \
 "
 
 ROS_BUILDTOOL_EXPORT_DEPENDS = ""
@@ -79,11 +80,19 @@ ROS_BUILDTOOL_EXPORT_DEPENDS = ""
 DEPENDS = "${ROS_BUILD_DEPENDS} ${ROS_BUILDTOOL_DEPENDS}"
 DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
+
+do_install:append() {
+    rm -rf ${D}/usr/include/*
+    install -d ${D}/usr/include/qrb_ros_amr/
+    cp -r ${S}/include/*  ${D}/usr/include/qrb_ros_amr/
+}
+
+
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS} ${NON_ROS_EXEC_DEPENDS}"
 
-SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_follow_path_service.git;protocol=https;branch=main"
-SRCREV = "b9d051fe009426134b7663e443f704847dfaafd8"
-S         =  "${WORKDIR}/git/qrb_ros_follow_path/"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_amr_service.git;protocol=https;branch=main"
+SRCREV = "540bf9b45c2950094dcd79586d6d9c5d94fe42d6"
+S         =  "${WORKDIR}/git/qrb_ros_amr/"
 
 ROS_BUILD_TYPE = "ament_cmake"
 do_package_qa[noexec] = "1"
