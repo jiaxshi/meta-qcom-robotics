@@ -82,6 +82,7 @@ FUNCTION:append:qcom-custom-bsp = " \
 
 FUNCTION:remove:qcom-custom-bsp = " realsense2-camera realsense2-camera-msgs librealsense2 "
 FUNCTION:append:qcom-custom-bsp:qcm6490 = " qrb-ros-imu "
+FUNCTION:append:qcom-custom-bsp = " ${@bb.utils.contains_any('BBFILE_COLLECTIONS', 'qcom-robotics', ' follow-me ', '', d)} "
 
 #basic dependnecy for sdk buildtime and runtime
 BASIC_DEPENDENCY += " \
