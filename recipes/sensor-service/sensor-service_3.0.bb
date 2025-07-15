@@ -9,9 +9,9 @@ DEPENDS += "protobuf-native"
 DEPENDS += "qcom-sensors-api"
 DEPENDS += "qcom-sensors-utils"
 DEPENDS += "qcom-sensinghub"
-DEPENDS += "jsoncpp"
+DEPENDS += "yaml-cpp"
 DEPENDS += "libbsd"
-RDEPENDS:${PN} += "jsoncpp"
+RDEPENDS:${PN} += "yaml-cpp"
 
 QCM6490_SHA256SUM = "bdfb11f809dff9ce69b7a2d09a4f692e26a5b031f56ca9b52c9cd4f29345d804"
 
