@@ -5,7 +5,7 @@ LICENSE  = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=550794465ba0ec5312d6919e203a55f9"
 
 SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_camera.git;protocol=https;branch=main;subpath=qrb_ros_camera"
-SRCREV = "cdc4908b348f8eecfb0e3cb8c1bba786d2fc0c98"
+SRCREV = "8f9598e0da29fb02af91f841a25a2cc7c1018601"
 S = "${WORKDIR}/qrb_ros_camera"
 
 # Dependencies
