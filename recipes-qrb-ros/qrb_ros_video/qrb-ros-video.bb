@@ -64,7 +64,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEP
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 SRC_URI = "git://github.com/quic-qrb-ros/qrb_ros_video.git;protocol=https;branch=main"
-SRCREV = "fe5993c3357fd184336be96346530825faf9e690"
+SRCREV = "d239b0de931c280b3ff3d6235f14f1230bd6a9cd"
 S = "${WORKDIR}/git/qrb_ros_video"
 
 ROS_BUILD_TYPE = "ament_cmake"
