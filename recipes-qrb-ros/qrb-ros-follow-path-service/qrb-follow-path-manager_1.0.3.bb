@@ -42,7 +42,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS} ${NON_ROS_EXEC_DEPENDS}"
 
 SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_follow_path_service.git;protocol=https;branch=main"
-SRCREV = "28921bb4f1fe10373de064a063357a84bbb2468c"
+SRCREV = "7b694220249763b774dcdc875538c44a6647571a"
 S = "${WORKDIR}/git/qrb_follow_path_manager"
 
 ROS_BUILD_TYPE = "ament_cmake"
