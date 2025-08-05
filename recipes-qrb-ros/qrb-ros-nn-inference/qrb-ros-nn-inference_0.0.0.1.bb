@@ -58,7 +58,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEP
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_nn_inference.git;protocol=https;branch=main"
-SRCREV = "adfe61aed2e368994ed51f86626328b108524e53"
+SRCREV = "29268979a3a7209956f16c28821ca5b79be7e7fa"
 S = "${WORKDIR}/git/qrb_ros_nn_inference"
 
 ROS_BUILD_TYPE = "ament_cmake"
