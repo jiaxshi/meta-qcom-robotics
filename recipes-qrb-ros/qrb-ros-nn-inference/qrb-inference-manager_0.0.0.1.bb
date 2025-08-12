@@ -47,7 +47,7 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 
 SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_nn_inference.git;protocol=https;branch=main"
-SRCREV = "29268979a3a7209956f16c28821ca5b79be7e7fa"
+SRCREV = "9f4a748a14216922ab760b514ed2968b2cb7d95f"
 S = "${WORKDIR}/git/qrb_inference_manager"
 
 ROS_BUILD_TYPE = "ament_cmake"
