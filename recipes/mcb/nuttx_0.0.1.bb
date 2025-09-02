@@ -3,11 +3,9 @@ DESCRIPTION = "motor control board FW "
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/${LICENSE};md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-# SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/external/nuttx.git;protocol=https;rev=e50bbb6eb542d3950481e1d464cd26ddf0208c08;branch=robotics.qclinux.1.0.r1-rel"
-
 SRCPROJECT = "git://git.codelinaro.org/clo/le/platform/external/nuttx.git;protocol=https"
 SRCBRANCH  = "robotics.qclinux.1.0.r1-rel"
-SRCREV     = "e50bbb6eb542d3950481e1d464cd26ddf0208c08"
+SRCREV     = "f1eeb84ef3454cec7bf8da36939a4280bd910770"
 
 SRC_URI +=   "${SRCPROJECT};branch=${SRCBRANCH}"
 

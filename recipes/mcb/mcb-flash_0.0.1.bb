@@ -11,11 +11,9 @@ DEPENDS = "libqrc-udriver"
 #PR = "r0"
 #PV = "1.0"
 
-# SRC_URI +=  "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https;rev=ce63524de87702fc12c6bcbad68e47daccdcc146;branch=robotics.qclinux.1.0.r1-rel"
-
 SRCPROJECT = "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robotics-oss.git;protocol=https"
 SRCBRANCH  = "robotics.qclinux.1.0.r1-rel"
-SRCREV     = "ce63524de87702fc12c6bcbad68e47daccdcc146"
+SRCREV     = "e91ceca2c55aeb5a31b65a20d07772f04f88388f"
 
 SRC_URI +=   "${SRCPROJECT};branch=${SRCBRANCH}"
 

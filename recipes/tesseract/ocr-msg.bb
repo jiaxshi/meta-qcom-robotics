@@ -9,11 +9,10 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a4
 
 SRCPROJECT = "git://git.codelinaro.org/clo/le/qirp-oss.git;protocol=https"
 SRCBRANCH  = "robotics-sdk.qclinux.1.0.r1-rel"
-SRCREV     = "f09dc67edf91484b6223ca90307cf4a88ab02276"
+SRCREV     = "1a5a68c7208bcb64b9c9998426600c6da6ce068d"
 
 SRC_URI +=   "${SRCPROJECT};branch=${SRCBRANCH}"
 
-# SRC_URI   +=  "git://git.codelinaro.org/clo/le/qirp-oss.git;protocol=https;rev=f09dc67edf91484b6223ca90307cf4a88ab02276;branch=robotics-sdk.qclinux.1.0.r1-rel"
 S         =  "${WORKDIR}/git/samples/ai_nodes/ocr_service/ocr_msg/"
 
 ROS_CN = "ocr_msg"
