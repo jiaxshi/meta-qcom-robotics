@@ -9,12 +9,15 @@ DEPENDS += "protobuf-native"
 DEPENDS += "qcom-sensors-api"
 DEPENDS += "qcom-sensors-utils"
 DEPENDS += "qcom-sensinghub"
-DEPENDS += "jsoncpp"
+DEPENDS += "yaml-cpp"
 DEPENDS += "libbsd"
-RDEPENDS:${PN} += "jsoncpp"
+RDEPENDS:${PN} += "yaml-cpp"
 
-SRC_URI = "https://${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}/${BPN}_${PV}_${ROBOT_PBT_ARCH}.tar.gz"
-SRC_URI[sha256sum] = "8cc112007468c0d43eb6fc86e6ee614554e52871fbb3d890e2ab9869176198df"
+QCM6490_SHA256SUM = "bdfb11f809dff9ce69b7a2d09a4f692e26a5b031f56ca9b52c9cd4f29345d804"
+
+SRC_URI[qcm6490.sha256sum] = "${QCM6490_SHA256SUM}"
+
+SRC_URI = "${ROBOT_PBT_ARTIFACTORY}/${ROBOT_PBT_BUILD_ID}/${ROBOT_PBT_BIN_PATH}/${BPN}_${PV}_${PBT_ARCH}.tar.gz;name=${PBT_ARCH}"
 
 S = "${WORKDIR}/sensor-service"
 

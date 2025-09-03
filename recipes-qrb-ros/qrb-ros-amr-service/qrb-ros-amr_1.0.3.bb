@@ -91,7 +91,7 @@ do_install:append() {
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS} ${NON_ROS_EXEC_DEPENDS}"
 
 SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_amr_service.git;protocol=https;branch=main"
-SRCREV = "555dce2c9d87723e10f09efde73842f26caa5c98"
+SRCREV = "b03f39780d615418ec7c4218431b76e7af2dec3c"
 S         =  "${WORKDIR}/git/qrb_ros_amr/"
 
 ROS_BUILD_TYPE = "ament_cmake"

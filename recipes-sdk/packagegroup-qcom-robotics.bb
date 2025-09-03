@@ -25,6 +25,7 @@ FUNCTION:append = " \
     qrb-ros-transport-point-cloud2-type \
     qrb-colorspace-convert-lib \
     qrb-ros-colorspace-convert \
+    qrb-ros-benchmark \
     dmabuf-transport \
     qrb-ros-system-monitor \
     qrb-ros-system-monitor-interfaces \
@@ -66,16 +67,16 @@ FUNCTION:append:qcom-custom-bsp = " \
     qrb-ros-follow-path \
     qrb-amr-manager \
     qrb-ros-amr \
+    ros-gst-bridge-audio-msgs \
+    ros-gst-bridge-msgs \
+    ros-gst-bridge \
+    ros-gst-bridge-pipeline \
+    ros-gst-bridge-pipeline-plugins \
 "
 
-# enable sample packages enabled by default
-FUNCTION:append:qcom-custom-bsp = " \
-    sample-hand-detection \
-    sample-resnet101-quantized \
-    simulation-sample-amr-simple-motion \
-"
 FUNCTION:remove:qcom-custom-bsp = " realsense2-camera realsense2-camera-msgs librealsense2 "
-FUNCTION:append:qcom-custom-bsp:qcm6490 = " qrb-ros-imu follow-me "
+FUNCTION:append:qcom-custom-bsp:qcm6490 = " qrb-ros-imu "
+FUNCTION:append:qcom-custom-bsp = " ${@bb.utils.contains_any('BBFILE_COLLECTIONS', 'qcom-robotics', ' follow-me ', '', d)} "
 
 #basic dependnecy for sdk buildtime and runtime
 BASIC_DEPENDENCY += " \
@@ -106,3 +107,4 @@ BASIC_DEPENDENCY:append:qcom-custom-bsp:qcm6490 = " camxapi-kt-dev "
 RDEPENDS:${PN} = "${FUNCTION} ${BASIC_DEPENDENCY}"
 
 do_package_qa[noexec] = "1"
+

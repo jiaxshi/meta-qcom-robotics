@@ -36,7 +36,7 @@ RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 SRC_URI = "git://github.com/qualcomm-qrb-ros/libqrc.git;protocol=https;branch=main"
 S = "${WORKDIR}/git/libqrc"
 
-SRCREV = "4a705a493009b22ff1d524b7706c122d4e9f9f97"
+SRCREV = "25e6a353675cda9aa7aac5be5cddac05277ec88e"
 
 # define the build type : ament_cmake, ament_python, cmake etc...
 ROS_BUILD_TYPE = "ament_cmake"

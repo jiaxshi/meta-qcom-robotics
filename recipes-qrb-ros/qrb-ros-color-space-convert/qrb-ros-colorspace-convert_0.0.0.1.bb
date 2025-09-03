@@ -40,9 +40,9 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS}"
 
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
-SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_samples.git;protocol=https;branch=main;subpath=platform/sample_colorspace_convert"
-SRCREV = "4f346e8e739551e02cdcf48057b3307031b1cad9"
-S = "${WORKDIR}/sample_colorspace_convert/qrb_ros_colorspace_convert"
+SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_color_space_convert.git;protocol=https;branch=main"
+SRCREV = "bee8edb29f23b08b318225bfc80417082cedcce4"
+S = "${WORKDIR}/git/qrb_ros_colorspace_convert"
 
 ROS_BUILD_TYPE = "ament_cmake"
 

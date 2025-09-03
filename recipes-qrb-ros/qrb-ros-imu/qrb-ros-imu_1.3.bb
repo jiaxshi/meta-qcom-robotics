@@ -8,7 +8,7 @@ LICENSE          = "BSD-3-Clause-Clear"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a472ca93716d01033a"
 
 SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_imu.git;protocol=https;branch=main"
-SRCREV = "21ef83e2a2d8e201aaeb379e88dc5ff4f6a91291"
+SRCREV = "e567bc29ca2d96737167a7c3720c3cd86b706c6a"
 S = "${WORKDIR}/git/qrb_ros_imu"
 
 ROS_CN = "qrb_ros_imu"

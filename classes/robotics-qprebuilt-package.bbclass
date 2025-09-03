@@ -1,6 +1,6 @@
 # Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
 # SPDX-License-Identifier: BSD-3-Clause-Clear
-
+# This class is for external use only
 pkg_dest = "/usr"
 
 do_install() {

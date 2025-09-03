@@ -6,7 +6,13 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/${LICENSE};md5=7a434440b651f4a4
 
 DEPENDS += "dbus"
 
-SRC_URI += "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-battery.git;protocol=https;rev=cb5e2cea40f53509ffa15dbf65f19727ad2da804;branch=robotics.qclinux.1.0.r1-rel"
+SRCPROJECT = "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-battery.git;protocol=https"
+SRCBRANCH  = "robotics.qclinux.1.0.r1-rel"
+SRCREV     = "cb5e2cea40f53509ffa15dbf65f19727ad2da804"
+
+SRC_URI +=   "${SRCPROJECT};branch=${SRCBRANCH}"
+
+# SRC_URI += "git://git.codelinaro.org/clo/le/platform/vendor/qcom-opensource/robot-battery.git;protocol=https;rev=cb5e2cea40f53509ffa15dbf65f19727ad2da804;branch=robotics.qclinux.1.0.r1-rel"
 S = "${WORKDIR}/git/battery-service"
 
 #EXTRA_OECONF += " --with-sanitized-headers=${STAGING_KERNEL_BUILDDIR}/usr/include"

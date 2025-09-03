@@ -38,7 +38,7 @@ DEPENDS += "${ROS_EXPORT_DEPENDS} ${ROS_BUILDTOOL_EXPORT_DEPENDS} ${ROS_TEST_DEP
 RDEPENDS:${PN} += "${ROS_EXEC_DEPENDS}"
 
 SRC_URI = "git://github.com/qualcomm-qrb-ros/qrb_ros_imu.git;protocol=https;branch=main"
-SRCREV = "21ef83e2a2d8e201aaeb379e88dc5ff4f6a91291"
+SRCREV = "e567bc29ca2d96737167a7c3720c3cd86b706c6a"
 S = "${WORKDIR}/git/qrb_sensor_client"
 
 ROS_BUILD_TYPE = "ament_cmake"
