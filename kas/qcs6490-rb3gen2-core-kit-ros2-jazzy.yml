@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/siemens/kas/master/kas/schema-kas.json
+
+header:
+  version: 14
+  includes:
+  - repo: meta-qcom
+    file: ci/qcm6490.yml
+
+machine: qcs6490-rb3gen2-core-kit
+
+# distro: "ros2"
+
+repos:
+  meta-qcom:
+    url: "https://github.com/qualcomm-linux/meta-qcom.git"
+    path: "layers/meta-qcom"
+    branch: master
+
+  ros:
+    url: "https://github.com/ros/meta-ros.git"
+    path: "layers/meta-ros"
+    layers:
+      meta-ros-common:
+      meta-ros2:
+      meta-ros2-jazzy:
+
+  meta-openembedded:
+    url: "https://github.com/openembedded/meta-openembedded.git"
+    path: "layers/meta-openembedded"
+    layers:
+      meta-filesystems:
+      meta-gnome:
+      meta-initramfs:
+      meta-multimedia:
+      meta-networking:
+      meta-oe:
+      meta-perl:
+      meta-python:
+      meta-webserver:
+      meta-xfce:
+
+  meta-qcom-robotics:
+    url: "https://github.com/jiaxshi/meta-qcom-robotics"
+    path: "layers/meta-qcom-robotics"
+    branch: "main"
+
+local_conf_header:
+  ros: |
+    IMAGE_INSTALL:append = "ros-base"
